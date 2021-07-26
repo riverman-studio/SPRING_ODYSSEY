@@ -75,10 +75,13 @@ public class gpConnector : MonoBehaviour
             vfx.visualEffectAsset = (VisualEffectAsset)AssetDatabase.LoadAssetAtPath(vfxAsset, typeof(VisualEffectAsset));
             Transform pt1 = ln.GetChild(0);
             Transform pt2 = ln.GetChild(1);
-             
+
+
+
+            /*vfx.SetVector3("startPoint", ln.TransformPoint(pt1.localPosition));
+            vfx.SetVector3("endPoint", ln.TransformPoint(pt2.localPosition));*/
             vfx.SetVector3("startPoint", pt1.position);
             vfx.SetVector3("endPoint", pt2.position);
-
 
             /*Transform ln = currGo.transform.GetChild(i);
             LineRenderer lr = null;
