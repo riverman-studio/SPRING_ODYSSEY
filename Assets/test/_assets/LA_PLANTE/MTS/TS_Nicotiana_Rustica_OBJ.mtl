@@ -1,0 +1,162 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 16.11.2017 10:01:13
+
+newmtl TS_Nicotiana_Rustica_Leaf_02
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__78_Composite.tga
+	map_Kd Map__78_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_02_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_02_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Stem
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.1061 0.3544 0.0808
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Stem.png
+	map_Kd C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Stem.png
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Stem.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Stem.png
+
+newmtl TS_Nicotiana_Rustica_Leaf_01
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__79_Composite.tga
+	map_Kd Map__79_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_01_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_01_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Leaf_03
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__80_Composite.tga
+	map_Kd Map__80_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_03_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_03_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Leaf_04
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__81_Composite.tga
+	map_Kd Map__81_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_04_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_04_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Leaf_06
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__82_Composite.tga
+	map_Kd Map__82_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_06_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_06_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Leaf_05
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__83_Composite.tga
+	map_Kd Map__83_Composite.tga
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_05_Bump.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_05_Bump.png
+
+newmtl TS_Nicotiana_Rustica_Flower_02
+	Ns 40.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0300 0.0300 0.0300
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_002.png
+	map_Kd C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_002.png
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_002.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_002.png
+
+newmtl TS_Nicotiana_Rustica_Flower_01
+	Ns 60.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.8000 0.8000 0.8000
+	Ks 0.0400 0.0400 0.0400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_001.png
+	map_Kd C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_001.png
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_001.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_001.png
+
+newmtl TS_Nicotiana_Rustica_Flower_03
+	Ns 40.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.2000 0.2000 0.2000
+	Kd 0.9000 0.9000 0.9000
+	Ks 0.1000 0.1000 0.1000
+	Ke 0.1000 0.1000 0.1000
+	map_Ka C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_003.png
+	map_Kd C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_003.png
+	map_bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_003.png
+	bump C:\Users\APEC\Desktop\TS_Nicotiana_Rustica\TS_Nicotiana_Rustica_Textures\TS_Nicotiana_Rustica_Flower_003.png

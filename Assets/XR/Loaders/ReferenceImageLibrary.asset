@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: ReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 5445438426157177063
+  m_GuidHigh: 10636389785279910025
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5023948539930950890
+      m_GuidHigh: 1929469746066580621
+    m_SerializedTextureGuid:
+      m_GuidLow: 11553008221589658219
+      m_GuidHigh: 14586316281162007498
+    m_Size: {x: 0.283, y: 0.283}
+    m_SpecifySize: 1
+    m_Name: spawner
+    m_Texture: {fileID: 2800000, guid: 5f04da6b87c4a054ca83284860016dca, type: 3}

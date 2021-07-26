@@ -1,0 +1,56 @@
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_01
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_03
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_05
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_07
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_09
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Leaf_11
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
+newmtl TS_Nicotiana_Rustica_OBJ:TS_Nicotiana_Rustica_Stem
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.50
+Ks 0.04 0.04 0.04
+Ns 60.00
