@@ -13,6 +13,11 @@ public class ImageTracking : MonoBehaviour
     [SerializeField]
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
+
+    [SerializeField]
+    public GameObject imageDetectorPrefab;
+    private GameObject spawnedDetectorPrefabs = null;
+
     private ARTrackedImageManager trackedImageManager;
 
 
@@ -39,6 +44,9 @@ public class ImageTracking : MonoBehaviour
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
         spawnedPrefabs = Instantiate(placablePrefabs, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
+        spawnedDetectorPrefabs = Instantiate(imageDetectorPrefab, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
+
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
     }
 
@@ -52,6 +60,7 @@ public class ImageTracking : MonoBehaviour
         trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
     private bool added = false;
+    GameObject cube = null;
     private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach (ARTrackedImage trackedImage in eventArgs.added)
@@ -71,7 +80,8 @@ public class ImageTracking : MonoBehaviour
 
     private void UpdateImage(ARTrackedImage trackedImage)
     {
-
+        spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
+        spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
         spawnAnchor(trackedImage);
     }
 
@@ -79,10 +89,10 @@ public class ImageTracking : MonoBehaviour
     public void spawnAnchor(ARTrackedImage trackedImage)
     {
         bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        if (!(bTouching && !added))
-        {
+        if (!bTouching)
             return;
-        }
+        if (added)
+            return;
 
         Transform cameraTransform = Camera.main.transform;
 
@@ -103,6 +113,7 @@ public class ImageTracking : MonoBehaviour
             // Create a new anchor
             Pose anchorPose = new Pose(trackedImage.transform.position, hit.pose.rotation);
             var anchor = CreateAnchor(hit, anchorPose);
+            added = true;
 
             //delete all anchors
             foreach (ARAnchor oldanchor in m_Anchors)
