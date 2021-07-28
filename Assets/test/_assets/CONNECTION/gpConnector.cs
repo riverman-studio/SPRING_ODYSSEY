@@ -58,7 +58,7 @@ public class gpConnector : MonoBehaviour
 #if UNITY_EDITOR
 
 
-    [MenuItem("SO / add Linerenderer")]
+    [MenuItem("SO / Update Linerenderer")]
     static void AddLineRenderer()
     {
         string cageMat = "Assets/test/_assets/CONNECTION/cageMat.mat";
@@ -67,40 +67,58 @@ public class gpConnector : MonoBehaviour
 
 
         GameObject currGo = Selection.gameObjects[0];
-        //Material connMat = currGo.GetComponent<gpConnector>().connectorMat;
-        for (int i = 0; i < currGo.transform.childCount; i++)
+
+        cageController.spawnCages(currGo.transform);
+       /* if ((currGo.name == "lineCAGE") || (currGo.name == "dottedCAGE"))
         {
-            Transform ln = currGo.transform.GetChild(i);
-            VisualEffect vfx = ln.gameObject.AddComponent<VisualEffect>();
-            vfx.visualEffectAsset = (VisualEffectAsset)AssetDatabase.LoadAssetAtPath(vfxAsset, typeof(VisualEffectAsset));
-            Transform pt1 = ln.GetChild(0);
-            Transform pt2 = ln.GetChild(1);
-             
-            vfx.SetVector3("startPoint", pt1.position);
-            vfx.SetVector3("endPoint", pt2.position);
+            Transform structure2 = currGo.transform.GetChild(0);
+            //Material connMat = currGo.GetComponent<gpConnector>().connectorMat;
+            for(int j =0; j< structure2.childCount; j++)
+            {
+                for (int i = 0; i < structure2.GetChild(j).childCount; i++)
+                {
+                    Transform ln = structure2.GetChild(j).GetChild(i);
+                    if (!ln.name.StartsWith("cv_"))
+                        continue;
+                    LineRenderer lr = null;
+                    lr = ln.GetComponent<LineRenderer>();
+                    if (!lr)
+                        lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
+                    Transform pt1 = ln.GetChild(0);
+                    Transform pt2 = ln.GetChild(1);
+                    Vector3[] positions = new Vector3[2];
+                    positions[0] = new Vector3(0, 0, 0);
+                    positions[0] = pt1.position;
+                    positions[1] = new Vector3(0, 0, 0);
+                    positions[1] = pt2.position;
+                    lr.positionCount = positions.Length;
+                    lr.SetPositions(positions);
+                    lr.material = SRm;
+                    lr.startWidth = 0.01f;
+                    lr.textureMode = LineTextureMode.Tile;
+                }
+            }
+        }*/
+        /*else
+        {
+            //Material connMat = currGo.GetComponent<gpConnector>().connectorMat;
+            for (int i = 0; i < currGo.transform.childCount; i++)
+            {
+                Transform ln = currGo.transform.GetChild(i);
+                VisualEffect vfx = ln.gameObject.AddComponent<VisualEffect>();
+                if (!vfx)
+                    continue;
+                vfx.visualEffectAsset = (VisualEffectAsset)AssetDatabase.LoadAssetAtPath(vfxAsset, typeof(VisualEffectAsset));
+                Transform pt1 = ln.GetChild(0);
+                Transform pt2 = ln.GetChild(1);
+                vfx.SetVector3("startPoint", pt1.position);
+                vfx.SetVector3("endPoint", pt2.position);
+            }
+        }*/
 
-
-            /*Transform ln = currGo.transform.GetChild(i);
-            LineRenderer lr = null;
-            lr = ln.GetComponent<LineRenderer>();
-            if (!lr)
-                lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
-            Transform pt1 = ln.GetChild(0);
-            Transform pt2 = ln.GetChild(1);
-            Vector3[] positions = new Vector3[2];
-            positions[0] = new Vector3(0, 0, 0);
-            positions[0] = pt1.position;
-            positions[1] = new Vector3(0, 0, 0);
-            positions[1] = pt2.position;
-            lr.positionCount = positions.Length;
-            lr.SetPositions(positions);
-            lr.material = SRm;
-            lr.startWidth = 0.01f;
-            lr.textureMode = LineTextureMode.Tile;*/
-        }
     }
 
-
+    /*
     [MenuItem("SO / remove Linerenderer")]
     static void RemoveLineRenderer()
     {
@@ -121,7 +139,7 @@ public class gpConnector : MonoBehaviour
                 DestroyImmediate(lr);
             }
         }
-    }
+    }*/
     [MenuItem("SO / set line render width")]
     static void SetLineRendererWidth()
     {

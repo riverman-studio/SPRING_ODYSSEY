@@ -13,6 +13,11 @@ public class sisterNodeBehaviour : MonoBehaviour
     private void Awake()
     {
         _lineRenderer = gameObject.GetComponent<LineRenderer>();
+        if (!_lineRenderer)
+        {
+            enabled = false;
+            return;
+        }
         Reset();
     }
     public void Reset()

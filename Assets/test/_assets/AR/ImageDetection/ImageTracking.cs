@@ -13,6 +13,11 @@ public class ImageTracking : MonoBehaviour
     [SerializeField]
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
+
+    [SerializeField]
+    public GameObject imageDetectorPrefab;
+    private GameObject spawnedDetectorPrefabs = null;
+
     private ARTrackedImageManager trackedImageManager;
 
 
@@ -39,6 +44,9 @@ public class ImageTracking : MonoBehaviour
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
         spawnedPrefabs = Instantiate(placablePrefabs, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
+        spawnedDetectorPrefabs = Instantiate(imageDetectorPrefab, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
+
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
     }
 
@@ -52,6 +60,8 @@ public class ImageTracking : MonoBehaviour
         trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
     private bool added = false;
+    private bool imageDetected = false;
+    GameObject cube = null;
     private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach (ARTrackedImage trackedImage in eventArgs.added)
@@ -68,22 +78,27 @@ public class ImageTracking : MonoBehaviour
 
         }
     }
-
+    private void Update()
+    {
+        if(imageDetected)
+            spawnAnchor2(spawnedPrefabs);
+    }
     private void UpdateImage(ARTrackedImage trackedImage)
     {
-
-        spawnAnchor(trackedImage);
+        spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
+        spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
+        imageDetected = true;
+        //spawnAnchor(trackedImage);
     }
-
-
-    public void spawnAnchor(ARTrackedImage trackedImage)
+    public void spawnAnchor2(GameObject trackedImage)
     {
         bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        if (!(bTouching && !added))
-        {
+        if (!bTouching)
             return;
-        }
+        if (added)
+            return;
 
+        Debug.Log("sending ray");
         Transform cameraTransform = Camera.main.transform;
 
         // Raycast against planes and feature points
@@ -103,6 +118,7 @@ public class ImageTracking : MonoBehaviour
             // Create a new anchor
             Pose anchorPose = new Pose(trackedImage.transform.position, hit.pose.rotation);
             var anchor = CreateAnchor(hit, anchorPose);
+            added = true;
 
             //delete all anchors
             foreach (ARAnchor oldanchor in m_Anchors)
@@ -123,6 +139,66 @@ public class ImageTracking : MonoBehaviour
             {
                 Debug.Log("Error creating anchor");
             }
+        }
+        else
+        {
+            Debug.Log("Ray cast not hitting");
+        }
+    }
+
+    public void spawnAnchor(ARTrackedImage trackedImage)
+    {
+        bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
+        if (!bTouching)
+            return;
+        if (added)
+            return;
+
+        Debug.Log("sending ray");
+        Transform cameraTransform = Camera.main.transform;
+
+        // Raycast against planes and feature points
+        const TrackableType trackableTypes =
+            TrackableType.FeaturePoint |
+            TrackableType.PlaneWithinPolygon;
+
+        Vector3 vDir = (trackedImage.transform.position - cameraTransform.position).normalized;
+        Ray ray = new Ray(cameraTransform.position, vDir);
+
+        // Perform the raycast
+        if (m_RaycastManager.Raycast(ray, s_Hits, trackableTypes))
+        {
+            // Raycast hits are sorted by distance, so the first one will be the closest hit.
+            ARRaycastHit hit = s_Hits[0];
+
+            // Create a new anchor
+            Pose anchorPose = new Pose(trackedImage.transform.position, hit.pose.rotation);
+            var anchor = CreateAnchor(hit, anchorPose);
+            added = true;
+
+            //delete all anchors
+            foreach (ARAnchor oldanchor in m_Anchors)
+            {
+                Destroy(oldanchor.gameObject);
+            }
+            m_Anchors.Clear();
+
+
+
+            if (!anchor)
+            {
+                // Remember the anchor so we can remove it later.
+                m_Anchors.Add(anchor);
+                m_anchorIds.Add(anchor.trackableId);
+            }
+            else
+            {
+                Debug.Log("Error creating anchor");
+            }
+        }
+        else
+        {
+            Debug.Log("Ray cast not hitting");
         }
     }
     // Start is called before the first frame update
@@ -145,6 +221,10 @@ public class ImageTracking : MonoBehaviour
                 m_AnchorManager.anchorPrefab = oldPrefab;
                 return anchor;
             }
+        }
+        else
+        {
+            Debug.Log("ARPlane not hit");
         }
 
         // Otherwise, just create a regular anchor at the hit pose
