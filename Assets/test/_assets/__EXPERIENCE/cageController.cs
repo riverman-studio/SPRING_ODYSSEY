@@ -25,8 +25,29 @@ public class cageController : MonoBehaviour
     {
         RaycastHit HitInfo;
         Transform cameraTransform = Camera.main.transform;
+        bool bTouching = false;
+        Vector3 touchPos = new Vector3();
+        //if(_state != ConnectionState.Reaching)
+        if (Input.touches.Length > 0)
+        {
+            bTouching = true;
+            touchPos = Input.touches[0].position;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            bTouching = true;
+            touchPos = Input.mousePosition;
+            touchPos.x = Screen.width / 2;
+            touchPos.y = Screen.height / 2;
 
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f))
+        }
+        if (!bTouching)
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(touchPos);
+
+        //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f) && bTouching)
+        if(Physics.Raycast(ray, out HitInfo, 100.0f))
         {
             if (HitInfo.collider.gameObject.name =="Spot1")
             {
@@ -39,7 +60,7 @@ public class cageController : MonoBehaviour
 
             if( _spot1 && _spot2 && !dottedActivated)
             {
-                Vector3 newPos = Vector3.Lerp(_spot1.transform.position, _spot2.transform.position, 4.0f);
+                Vector3 newPos = _spot1.transform.position + ((_spot2.transform.position - _spot1.transform.position) * 2.0f);
                 ActivateDotted(newPos, Quaternion.identity);
             }
         }
@@ -142,7 +163,7 @@ public class cageController : MonoBehaviour
     }
     IEnumerator __fadeInCage(GameObject cage)
     {
-        yield return new WaitForSeconds(2.0f);
+        //yield return new WaitForSeconds(2.0f);
         float fAlpha = 0.0f;
         while (fAlpha < 1.0f)
         {
@@ -170,8 +191,15 @@ public class cageController : MonoBehaviour
             yield return null;
         }
         setColorOfCage(dottedCage, 0.0f);
-        dottedCage.SetActive(false);
-        ActivateLined();
+        if(!linedCage.activeSelf)
+        {
+            dottedCage.SetActive(false);
+            plant.transform.position = dottedCage.transform.position;
+            plant.transform.rotation = dottedCage.transform.rotation;
+            plant.SetActive(true);
+            ActivateLined();
+        }
+
         yield return null;
     }
 
