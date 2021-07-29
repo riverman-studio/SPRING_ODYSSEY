@@ -16,12 +16,22 @@ MonoBehaviour:
   m_GuidHigh: 10636389785279910025
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 5023948539930950890
-      m_GuidHigh: 1929469746066580621
+      m_GuidLow: 5287415612485341286
+      m_GuidHigh: 16879008390357694888
     m_SerializedTextureGuid:
-      m_GuidLow: 11553008221589658219
-      m_GuidHigh: 14586316281162007498
-    m_Size: {x: 0.283, y: 0.283}
+      m_GuidLow: 190503780838423411
+      m_GuidHigh: 12338363005705915704
+    m_Size: {x: 0.19, y: 0.19}
     m_SpecifySize: 1
-    m_Name: spawner
-    m_Texture: {fileID: 2800000, guid: 5f04da6b87c4a054ca83284860016dca, type: 3}
+    m_Name: Spot2
+    m_Texture: {fileID: 2800000, guid: e93e3b73ce2d02a4380dec40c8ab3aab, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 5044865135506625240
+      m_GuidHigh: 16318687079025804932
+    m_SerializedTextureGuid:
+      m_GuidLow: 1073211746432613665
+      m_GuidHigh: 1961975764585371208
+    m_Size: {x: 0.19, y: 0.19}
+    m_SpecifySize: 1
+    m_Name: Spot1
+    m_Texture: {fileID: 2800000, guid: b2e47d21d0650ee44856091a90563a1b, type: 3}
