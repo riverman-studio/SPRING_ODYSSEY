@@ -14,11 +14,13 @@ public class ImageTracking : MonoBehaviour
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
 
+    public cageController cageCtrl;
+
     [SerializeField]
     public GameObject imageDetectorPrefab;
     private GameObject spawnedDetectorPrefabs = null;
 
-    private ARTrackedImageManager trackedImageManager;
+    private ARTrackedImageManager m_trackedImageManager;
 
 
 
@@ -42,26 +44,25 @@ public class ImageTracking : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_AnchorManager = GetComponent<ARAnchorManager>();
 
-        trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
+        m_trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
         spawnedPrefabs = Instantiate(placablePrefabs, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
         spawnedDetectorPrefabs = Instantiate(imageDetectorPrefab, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
 
-        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
 
     }
 
     private void OnEnable()
     {
-        trackedImageManager.trackedImagesChanged += ImageChanged;
+        m_trackedImageManager.trackedImagesChanged += ImageChanged;
     }
 
     private void OnDisable()
     {
-        trackedImageManager.trackedImagesChanged -= ImageChanged;
+        m_trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
     private bool added = false;
     private bool imageDetected = false;
-    GameObject cube = null;
     private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
         foreach (ARTrackedImage trackedImage in eventArgs.added)
@@ -74,21 +75,30 @@ public class ImageTracking : MonoBehaviour
         }
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
-            spawnedPrefabs.SetActive(false);
-
+            //spawnedDetectorPrefabs.SetActive(false);
+            imageDetected = false;
         }
     }
     private void Update()
     {
-        if(imageDetected)
-            spawnAnchor2(spawnedPrefabs);
+        bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
+        if (imageDetected &&  bTouching)
+        {
+            //spawnAnchor2(spawnedPrefabs);
+            cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
+        }
+        if(cageCtrl.dottedActivated)
+        {
+            m_trackedImageManager.enabled = false;
+        }
     }
     private void UpdateImage(ARTrackedImage trackedImage)
     {
+        //spawnedDetectorPrefabs.SetActive(true);
         spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
         spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
+        spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
         imageDetected = true;
-        //spawnAnchor(trackedImage);
     }
     public void spawnAnchor2(GameObject trackedImage)
     {

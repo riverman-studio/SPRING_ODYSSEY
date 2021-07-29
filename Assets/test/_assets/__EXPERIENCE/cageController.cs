@@ -9,10 +9,13 @@ public class cageController : MonoBehaviour
     public GameObject linedCage;
     public GameObject plant;
 
-    bool dottedActivated = false;
+    public bool dottedActivated = false;
 
-    private Transform _spot1 = null;
-    private Transform _spot2 = null;
+    private Pose _spot1;
+    private Pose _spot2;
+
+    private bool _gotSpot1 = false;
+    private bool _gotSpot2 = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,25 +47,50 @@ public class cageController : MonoBehaviour
         if (!bTouching)
             return;
 
-        Ray ray = Camera.main.ScreenPointToRay(touchPos);
-
-        //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f) && bTouching)
-        if(Physics.Raycast(ray, out HitInfo, 100.0f))
+        /*if (Application.platform != RuntimePlatform.IPhonePlayer)
         {
-            if (HitInfo.collider.gameObject.name =="Spot1")
+            Ray ray = Camera.main.ScreenPointToRay(touchPos);
+            //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f) && bTouching)
+            if (Physics.Raycast(ray, out HitInfo, 100.0f))
             {
-                _spot1 = HitInfo.collider.gameObject.transform;
-            }
-            if (HitInfo.collider.gameObject.name == "Spot2")
-            {
-                _spot2 = HitInfo.collider.gameObject.transform;
-            }
+                if (HitInfo.collider.gameObject.name == "Spot1")
+                {
+                    _spot1 = HitInfo.collider.gameObject.transform;
+                }
+                if (HitInfo.collider.gameObject.name == "Spot2")
+                {
+                    _spot2 = HitInfo.collider.gameObject.transform;
+                }
 
-            if( _spot1 && _spot2 && !dottedActivated)
-            {
-                Vector3 newPos = _spot1.transform.position + ((_spot2.transform.position - _spot1.transform.position) * 2.0f);
-                ActivateDotted(newPos, Quaternion.identity);
+                if (!dottedActivated)
+                {
+                    Vector3 newPos = _spot1.transform.position + ((_spot2.transform.position - _spot1.transform.position) * 4.0f);
+                    ActivateDotted(newPos, Quaternion.identity);
+                }
             }
+        }*/
+
+    }
+
+    
+    public void SetImageSpot(Transform txSport)
+    {
+        if (txSport.name == "Spot1")
+        {
+            _spot1.position = txSport.position;
+            _spot1.rotation = txSport.rotation;
+            _gotSpot1 = true;
+        }
+        if (txSport.name == "Spot2")
+        {
+            _spot2.position = txSport.position;
+            _spot2.rotation = txSport.rotation;
+            _gotSpot2 = true;
+        }
+        if (_gotSpot1 && _gotSpot2 && !dottedActivated)
+        {
+            Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position) * 4.0f);
+            ActivateDotted(newPos, Quaternion.identity);
         }
     }
 
