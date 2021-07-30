@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.VFX;
 public class cageController : MonoBehaviour
 {
-
     public GameObject dottedCage;
     public GameObject linedCage;
     public GameObject plant;
+
+    public float dottedCageAlpha = 0.0f;
+    public float linesCageAlpha = 0.0f;
 
     public bool dottedActivated = false;
 
@@ -25,11 +27,16 @@ public class cageController : MonoBehaviour
             GameObject helperPCNode = GameObject.Find("__HELPERS");
             helperPCNode.SetActive(false);
         }
-
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        /*if(dottedActivated)
+
+        UpdatePC();
+    }
+    // Update is called once per frame
+    void UpdatePC()
     {
         RaycastHit HitInfo;
         Transform cameraTransform = Camera.main.transform;
@@ -81,9 +88,12 @@ public class cageController : MonoBehaviour
 
     }
 
+
     
     public void SetImageSpot(Transform txSport)
     {
+        if (!enabled)
+            return;
         if (txSport.name == "Spot1")
         {
             _spot1.position = txSport.position;
@@ -160,40 +170,6 @@ public class cageController : MonoBehaviour
         }
     }
 
-
-    public static void spawnCages(Transform cageRoot)
-    {
-        GameObject currGo = cageRoot.gameObject;
-        if ((currGo.name == "lineCAGE") || (currGo.name == "dottedCAGE"))
-        {
-            Transform structure2 = currGo.transform.GetChild(0);
-            for (int j = 0; j < structure2.childCount; j++)
-            {
-                for (int i = 0; i < structure2.GetChild(j).childCount; i++)
-                {
-                    Transform ln = structure2.GetChild(j).GetChild(i);
-                    if (!ln.name.StartsWith("cv_"))
-                        continue;
-                    LineRenderer lr = null;
-                    lr = ln.GetComponent<LineRenderer>();
-                    /*if (!lr)
-                        lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;*/
-                    Transform pt1 = ln.GetChild(0);
-                    Transform pt2 = ln.GetChild(1);
-                    Vector3[] positions = new Vector3[2];
-                    positions[0] = new Vector3(0, 0, 0);
-                    positions[0] = pt1.position;
-                    positions[1] = new Vector3(0, 0, 0);
-                    positions[1] = pt2.position;
-                    lr.positionCount = positions.Length;
-                    lr.SetPositions(positions);
-                    lr.startWidth = 0.01f;
-                    lr.textureMode = LineTextureMode.Tile;
-                }
-            }
-        }
-    }
-
     void FadeInCage(GameObject cage)
     {
         StartCoroutine(__fadeInCage(cage));
@@ -234,7 +210,7 @@ public class cageController : MonoBehaviour
             plant.transform.position = dottedCage.transform.position;
             plant.transform.rotation = dottedCage.transform.rotation;
             plant.SetActive(true);
-            ActivateLined();
+            //ActivateLined();
         }
 
         yield return null;

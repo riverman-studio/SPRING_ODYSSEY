@@ -128,6 +128,9 @@ public class nodeBehaviour : MonoBehaviour
             else
             {
                 _gpConnector.activateEverySegment();
+
+                GameObject timeLine = GameObject.Find("__TIMELINE");
+                timeLine.GetComponent<Animator>().SetTrigger("Next");
             }
         }
         if ((_state == ConnectionState.HilightedFirst) && !bTouching)

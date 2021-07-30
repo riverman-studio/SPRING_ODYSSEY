@@ -68,7 +68,7 @@ public class gpConnector : MonoBehaviour
 
         GameObject currGo = Selection.gameObjects[0];
 
-        cageController.spawnCages(currGo.transform);
+        cageState.spawnCages(currGo.transform);
        /* if ((currGo.name == "lineCAGE") || (currGo.name == "dottedCAGE"))
         {
             Transform structure2 = currGo.transform.GetChild(0);

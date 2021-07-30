@@ -14,7 +14,7 @@ public class ImageTracking : MonoBehaviour
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
 
-    public cageController cageCtrl;
+    public cageState cageCtrl;
 
     [SerializeField]
     public GameObject imageDetectorPrefab;
@@ -87,7 +87,7 @@ public class ImageTracking : MonoBehaviour
             //spawnAnchor2(spawnedPrefabs);
             cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
         }
-        if(cageCtrl.dottedActivated)
+        if(cageCtrl.isCageActivated())
         {
             m_trackedImageManager.enabled = false;
         }
