@@ -80,14 +80,14 @@ public class cageState : MonoBehaviour
                 //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f) && bTouching)
                 if (Physics.Raycast(ray, out HitInfo, 100.0f))
                 {
-                    if ((HitInfo.collider.gameObject.name == "Spot1") || (TrigPoint1))
+                    if ((HitInfo.collider.gameObject.name == "Spot1") && (TrigPoint1))
                     {
                         _spot1.position = HitInfo.collider.gameObject.transform.position;
                         _spot1.rotation = HitInfo.collider.gameObject.transform.rotation;
                         _gotSpot1 = true;
                         masterAnimator.SetTrigger("DebugNext");
                     }
-                    if ((HitInfo.collider.gameObject.name == "Spot2")|| (TrigPoint2))
+                    if ((HitInfo.collider.gameObject.name == "Spot2") &&  (TrigPoint2))
                     {
                         _spot2.position = HitInfo.collider.gameObject.transform.position;
                         _spot2.rotation = HitInfo.collider.gameObject.transform.rotation;
@@ -105,14 +105,14 @@ public class cageState : MonoBehaviour
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
        
-         if ((txSport.name == "Spot1")|| (TrigPoint1))
+         if ((txSport.name == "Spot1") && (TrigPoint1))
         {
             _spot1.position = txSport.position;
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
             masterAnimator.SetTrigger("DebugNext");
         }
-        if ((txSport.name == "Spot2")|| (TrigPoint2))
+        if ((txSport.name == "Spot2") && (TrigPoint2))
         {
             _spot2.position = txSport.position;
             _spot2.rotation = txSport.rotation;
