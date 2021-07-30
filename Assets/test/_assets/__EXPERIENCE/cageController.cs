@@ -20,6 +20,11 @@ public class cageController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            GameObject helperPCNode = GameObject.Find("__HELPERS");
+            helperPCNode.SetActive(false);
+        }
 
     }
 
@@ -47,7 +52,7 @@ public class cageController : MonoBehaviour
         if (!bTouching)
             return;
 
-        /*if (Application.platform != RuntimePlatform.IPhonePlayer)
+        if (Application.platform != RuntimePlatform.IPhonePlayer)
         {
             Ray ray = Camera.main.ScreenPointToRay(touchPos);
             //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f) && bTouching)
@@ -55,20 +60,24 @@ public class cageController : MonoBehaviour
             {
                 if (HitInfo.collider.gameObject.name == "Spot1")
                 {
-                    _spot1 = HitInfo.collider.gameObject.transform;
+                    _spot1.position = HitInfo.collider.gameObject.transform.position;
+                    _spot1.rotation = HitInfo.collider.gameObject.transform.rotation;
+                    _gotSpot1 = true;
                 }
                 if (HitInfo.collider.gameObject.name == "Spot2")
                 {
-                    _spot2 = HitInfo.collider.gameObject.transform;
+                    _spot2.position = HitInfo.collider.gameObject.transform.position;
+                    _spot2.rotation = HitInfo.collider.gameObject.transform.rotation;
+                    _gotSpot2 = true;
                 }
 
-                if (!dottedActivated)
+                if (_gotSpot1 && _gotSpot2 && !dottedActivated)
                 {
-                    Vector3 newPos = _spot1.transform.position + ((_spot2.transform.position - _spot1.transform.position) * 4.0f);
+                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position) * 2.0f);
                     ActivateDotted(newPos, Quaternion.identity);
                 }
             }
-        }*/
+        }
 
     }
 
