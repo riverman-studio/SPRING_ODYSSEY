@@ -13,6 +13,8 @@ public class radiationSpawner : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         GameObject unitRadiationInstance = Instantiate(unitRadiation, transform.position, Quaternion.identity);
         _unitRadiationAnimator = unitRadiationInstance.GetComponent<Animator>();
+        Transform radDir = transform.parent.GetChild(0);
+        unitRadiationInstance.GetComponent<radiationBoum>().radiationDirection = radDir.transform;
     }
 
     // Update is called once per frame
