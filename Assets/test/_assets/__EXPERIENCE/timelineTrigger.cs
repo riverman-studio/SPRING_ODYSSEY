@@ -9,6 +9,8 @@ public class timelineTrigger : MonoBehaviour
     public string triggerName;
     public bool triggerValue;
 
+    bool lastTriggerValue = false;
+
     void Start()
     {
         
@@ -17,7 +19,8 @@ public class timelineTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(triggerValue)
+        if(lastTriggerValue != triggerValue)
             childAnimator.SetTrigger(triggerName);
+        lastTriggerValue = triggerValue;
     }
 }
