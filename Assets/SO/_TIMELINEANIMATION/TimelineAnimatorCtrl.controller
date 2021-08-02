@@ -164,7 +164,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6803219885342000706}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 6292279414655670557}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -594,7 +595,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 10, y: 430, z: 0}
   m_ExitPosition: {x: 990, y: 420, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -1745901355098039112}
+  m_DefaultState: {fileID: -6596760816573547100}
 --- !u!1102 &5230672706184334315
 AnimatorState:
   serializedVersion: 6
@@ -622,6 +623,25 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6292279414655670557
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d05114e1f81c34c9d17d8b369aaefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainReactionList:
+  - subGameObject: MicAnim
+    triggerName: On
+    triggerBehaviour: 0
+  - subGameObject: MicAnim
+    triggerName: On
+    triggerBehaviour: 1
 --- !u!1102 &6434057953432445478
 AnimatorState:
   serializedVersion: 6
