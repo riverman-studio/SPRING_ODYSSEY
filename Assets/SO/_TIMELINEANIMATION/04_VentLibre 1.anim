@@ -566,6 +566,25 @@ AnimationClip:
     path: CAGE/VENT/VentCtrlVoice/VoixVent/04_Vent
     classID: 1
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Canvas/HUD/TitreStates/04_VentLibre
+    classID: 1
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -611,6 +630,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 1525875362
+      attribute: 2086281974
+      script: {fileID: 0}
+      typeID: 1
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1331541581
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -1880,6 +1906,25 @@ AnimationClip:
     attribute: localEulerAnglesRaw.z
     path: CAGE/VENT/VentCtrlVoice
     classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Canvas/HUD/TitreStates/04_VentLibre
+    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
