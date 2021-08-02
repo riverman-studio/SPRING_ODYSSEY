@@ -257,6 +257,25 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5169059922927832519
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d05114e1f81c34c9d17d8b369aaefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainReactionList:
+  - subGameObject: TargetARAnim
+    triggerName: Switch
+    triggerBehaviour: 0
+  - subGameObject: TargetARAnim
+    triggerName: Switch
+    triggerBehaviour: 1
 --- !u!1101 &-4208542863559008411
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -395,7 +414,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7903220663052634065}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5169059922927832519}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -627,7 +647,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 10, y: 430, z: 0}
   m_ExitPosition: {x: 990, y: 420, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -6596760816573547100}
+  m_DefaultState: {fileID: -1745901355098039112}
 --- !u!114 &4623268777080565727
 MonoBehaviour:
   m_ObjectHideFlags: 1
