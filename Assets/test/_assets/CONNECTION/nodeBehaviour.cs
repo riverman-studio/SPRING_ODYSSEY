@@ -26,6 +26,7 @@ public class nodeBehaviour : MonoBehaviour
     private Transform _connHelper = null;
     private GameObject _collisionCheck = null;
     private gpConnector _gpConnector = null;
+    private float blipRate = 8.0f;
     
 
 
@@ -85,12 +86,15 @@ public class nodeBehaviour : MonoBehaviour
 
         if (!_gpActivated)
             return;
+        blipRate = 3.0f;
         Transform cameraTransform = Camera.main.transform;
         RaycastHit HitInfo;
         RaycastHit[] hits;
         bool bTouching = false;
         Vector3 touchPos = new Vector3();
-        //if(_state != ConnectionState.Reaching)
+        touchPos.x = Screen.width / 2;
+        touchPos.y = Screen.height / 2;
+
         if (Input.touches.Length > 0)
         {
             bTouching = true;
@@ -100,9 +104,6 @@ public class nodeBehaviour : MonoBehaviour
         {
             bTouching = true;
             touchPos = Input.mousePosition;
-            touchPos.x = Screen.width / 2;
-            touchPos.y = Screen.height / 2;
-
         }
         if ((_state == ConnectionState.Reached) && !bTouching)
         {
@@ -150,11 +151,32 @@ public class nodeBehaviour : MonoBehaviour
 
 
         }
+        if ((_state == ConnectionState.NotStarted) && !bTouching)
+        {
+            Vector3 fromPosScrn = Camera.main.WorldToScreenPoint(DrawFrom.position);
+            Vector3 toPosScrn = Camera.main.WorldToScreenPoint(DrawTo.position);
+            fromPosScrn.z = 0.0f;
+            toPosScrn.z = 0.0f;
+
+            float fDistDrawLine = Vector3.Distance(fromPosScrn, toPosScrn);
+            Vector3 toPos = touchPos;
+            float fDist = Vector3.Distance(fromPosScrn, toPos);
+            Vector3 drawDirection = (DrawFrom.position - DrawTo.position).normalized;
+            float invFDot = 1.0f - Mathf.Abs(Vector3.Dot(drawDirection, cameraTransform.forward));
+            float distFactor = 1.0f - Mathf.Clamp01(fDist / fDistDrawLine);
+            blipRate = Mathf.Lerp(3.0f, 16.0f, Mathf.Sqrt(invFDot * distFactor));
+            Debug.Log(blipRate);
+
+
+
+        }
         if (bTouching)
         {
             if (_state == ConnectionState.NotStarted)
             {
-                if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f))
+                Ray ray = Camera.main.ScreenPointToRay(touchPos);
+                if (Physics.Raycast(ray, out HitInfo, 100.0f))
+                //if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out HitInfo, 100.0f))
                 {
                     if (HitInfo.collider.gameObject.GetInstanceID() == _connHelper.gameObject.GetInstanceID())
                     {
@@ -255,7 +277,7 @@ public class nodeBehaviour : MonoBehaviour
             }
                 
 
-            fTime += (Time.deltaTime * 3.0f);
+            fTime += (Time.deltaTime * blipRate);
             float fAlpha = Mathf.Sin(fTime);
             fAlpha = 0.5f + (fAlpha / 2.0f);
             _vfx.SetFloat("alpha", fAlpha);

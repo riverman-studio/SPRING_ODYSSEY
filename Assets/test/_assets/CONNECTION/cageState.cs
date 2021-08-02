@@ -85,15 +85,15 @@ public class cageState : MonoBehaviour
                         _spot1.position = HitInfo.collider.gameObject.transform.position;
                         _spot1.rotation = HitInfo.collider.gameObject.transform.rotation;
                         _gotSpot1 = true;
+                        masterAnimator.SetTrigger("Trigger1");
                         //masterAnimator.SetTrigger("DebugNext");
-                        masterAnimator.SetTrigger("Next");
                     }
                     if ((HitInfo.collider.gameObject.name == "Spot2") &&  (TrigPoint2))
                     {
                         _spot2.position = HitInfo.collider.gameObject.transform.position;
                         _spot2.rotation = HitInfo.collider.gameObject.transform.rotation;
                         _gotSpot2 = true;
-                        masterAnimator.SetTrigger("Next");
+                        masterAnimator.SetTrigger("Trigger2");
                     }
 
 
