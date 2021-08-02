@@ -10,6 +10,7 @@ using UnityEngine.XR.ARFoundation;
 
 public class ImageTracking : MonoBehaviour
 {
+    public Animator masterAnimator;
     [SerializeField]
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
@@ -94,11 +95,29 @@ public class ImageTracking : MonoBehaviour
     }
     private void UpdateImage(ARTrackedImage trackedImage)
     {
+        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
+        bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
+        bool go = false;
+        if ((TrigPoint1) && (trackedImage.referenceImage.name == "Spot1"))
+            go = true;
+        else if ((TrigPoint2) && (trackedImage.referenceImage.name == "Spot2"))
+            go = true;
+
         //spawnedDetectorPrefabs.SetActive(true);
-        spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
-        spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
-        spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
-        imageDetected = true;
+        imageDetected = false;
+        if(go)
+        {
+            spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
+            spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
+            spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
+            imageDetected = true;
+        }
+        else
+        {
+            spawnedDetectorPrefabs.transform.position.Set(0.0f, 1000.0f, 0.0f);
+        }
+
+        
     }
     public void spawnAnchor2(GameObject trackedImage)
     {

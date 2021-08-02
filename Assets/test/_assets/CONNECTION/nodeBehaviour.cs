@@ -131,7 +131,7 @@ public class nodeBehaviour : MonoBehaviour
                 _gpConnector.activateEverySegment();
 
                 GameObject timeLine = GameObject.Find("__TIMELINE");
-                timeLine.GetComponent<Animator>().SetTrigger("Next");
+                timeLine.GetComponent<Animator>().SetTrigger("Trigger3");
             }
         }
         if ((_state == ConnectionState.HilightedFirst) && !bTouching)

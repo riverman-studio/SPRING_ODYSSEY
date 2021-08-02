@@ -452,7 +452,7 @@ PlayerSettings:
   enableCrashReportAPI: 0
   cameraUsageDescription: Required for augmented reality support.
   locationUsageDescription: 
-  microphoneUsageDescription: 
+  microphoneUsageDescription: lalala
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144

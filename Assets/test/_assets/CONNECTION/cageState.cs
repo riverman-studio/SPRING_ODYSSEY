@@ -103,7 +103,7 @@ public class cageState : MonoBehaviour
     }
     public void SetImageSpot(Transform txSport)
     {
-        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
+        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
        
          if ((txSport.name == "Spot1") && (TrigPoint1))
@@ -111,14 +111,14 @@ public class cageState : MonoBehaviour
             _spot1.position = txSport.position;
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
-            masterAnimator.SetTrigger("DebugNext");
+            masterAnimator.SetTrigger("Trigger1");
         }
-        if ((txSport.name == "Spot2") && (TrigPoint2))
+        if ((txSport.name == "Spot2") && (TrigPoint2) && _gotSpot1)
         {
             _spot2.position = txSport.position;
             _spot2.rotation = txSport.rotation;
             _gotSpot2 = true;
-            masterAnimator.SetTrigger("Next");
+            masterAnimator.SetTrigger("Trigger2");
         }
        /* if (_gotSpot1 && _gotSpot2 && !dottedActivated)
         {
