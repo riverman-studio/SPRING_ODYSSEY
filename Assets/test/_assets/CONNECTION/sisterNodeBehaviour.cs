@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sisterNodeBehaviour : MonoBehaviour
+public class sisterNodeBehaviour : templateBehaviour
 {
     public int lineNumber=0;
     public Transform parentNode;
     LineRenderer _lineRenderer = null;
     public Transform DrawFrom, DrawTo;
-
+    public override LineRenderer GetLineRenderer()
+    {
+        return _lineRenderer;
+    }
     // Start is called before the first frame update
     private void Awake()
     {

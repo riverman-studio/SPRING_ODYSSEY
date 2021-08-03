@@ -6,6 +6,8 @@ using UnityEngine.VFX;
 public class cageState : MonoBehaviour
 {
     public Animator masterAnimator;
+    public gpConnector gpConn;
+    
 
     public GameObject dottedCage;
     public float dottedCageAlpha = 0.0f;
@@ -48,6 +50,14 @@ public class cageState : MonoBehaviour
         if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("InteractionLigneToComplete"))
         {
             
+        }
+        if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("12_Fin"))
+        {
+            if(dottedActivated)
+            {
+                gpConn.deActivateEverySegment();
+                dottedActivated = false;
+            }
         }
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");

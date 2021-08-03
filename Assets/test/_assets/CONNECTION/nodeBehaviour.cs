@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class nodeBehaviour : MonoBehaviour
+public class nodeBehaviour : templateBehaviour
 {
     // Start is called before the first frame update
 
@@ -27,8 +27,11 @@ public class nodeBehaviour : MonoBehaviour
     private GameObject _collisionCheck = null;
     private gpConnector _gpConnector = null;
     private float blipRate = 8.0f;
-    
 
+    public override LineRenderer GetLineRenderer()
+    {
+        return _lineRenderer;
+    }
 
 
     private void Awake()
@@ -107,6 +110,10 @@ public class nodeBehaviour : MonoBehaviour
         }
         if ((_state == ConnectionState.Reached) && !bTouching)
         {
+            if(_vfx)
+            {
+                _vfx.enabled = false;
+            }
             
             _gpActivated = false;
             _gpConnector.crosshairHide();

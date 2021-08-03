@@ -38,6 +38,30 @@ public class gpConnector : MonoBehaviour
         }
     }
 
+
+    public void deActivateEverySegment()
+    {
+        for (int j = 0; j < gameObject.transform.childCount; j++)
+        {
+            Transform levelChild = gameObject.transform.GetChild(j);
+            for (int i = 0; i < levelChild.childCount; i++)
+            {
+                Transform cageSegment = levelChild.GetChild(i);
+                templateBehaviour mb = cageSegment.GetComponent<microBehaviour>() as templateBehaviour;
+                if(!mb)
+                    mb = cageSegment.GetComponent<sisterNodeBehaviour>() as templateBehaviour;
+                if (!mb)
+                    mb = cageSegment.GetComponent<nodeBehaviour>() as nodeBehaviour;
+                if (mb)
+                {
+                    mb.unFillTheLine((float)(2-j));
+                }
+            }
+        }
+    }
+
+
+
     // Update is called once per frame
     public void crosshairHide()
     {
