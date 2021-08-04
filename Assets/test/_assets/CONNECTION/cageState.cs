@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-
+using UnityEngine.Animations;
 public class cageState : MonoBehaviour
 {
     public Animator masterAnimator;
@@ -10,6 +10,7 @@ public class cageState : MonoBehaviour
     
 
     public GameObject dottedCage;
+    public Transform ventLibre;
     public float dottedCageAlpha = 0.0f;
 
     public GameObject lineCage;
@@ -22,6 +23,12 @@ public class cageState : MonoBehaviour
     private bool _gotSpot1 = false;
     private bool _gotSpot2 = false;
     private bool dottedActivated = false;
+
+    private bool _bWindLocked = false;
+    private Pose lockedWindPose;
+
+
+
     void Start()
     {
         
@@ -34,7 +41,11 @@ public class cageState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("06_StructureApparition"))
+        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
+        bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
+
+
+        if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("06_StructureApparition"))
         {
             if(_gotSpot1 && _gotSpot2)
             {
@@ -51,6 +62,15 @@ public class cageState : MonoBehaviour
         {
             
         }
+
+        if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("04_VentLibre 1"))
+        {
+            if (_bWindLocked)
+                return;
+            ventLibre.transform.position = lockedWindPose.position;
+            ventLibre.transform.rotation = lockedWindPose.rotation;
+        }
+
         if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("12_Fin"))
         {
             if(dottedActivated)
@@ -59,8 +79,10 @@ public class cageState : MonoBehaviour
                 dottedActivated = false;
             }
         }
-        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
-        bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
+
+
+
+
         if (TrigPoint1 || TrigPoint2)
         {
             RaycastHit HitInfo;
@@ -97,6 +119,7 @@ public class cageState : MonoBehaviour
                         _gotSpot1 = true;
                         masterAnimator.SetTrigger("Trigger1");
                         //masterAnimator.SetTrigger("DebugNext");
+                        spawnWind(HitInfo.collider.gameObject.transform);
                     }
                     if ((HitInfo.collider.gameObject.name == "Spot2") &&  (TrigPoint2))
                     {
@@ -111,6 +134,23 @@ public class cageState : MonoBehaviour
             }
         }
     }
+    void spawnWind(Transform txSport)
+    {
+        Vector3 lockedWindPos = txSport.position + (txSport.forward * -1.5f);
+        lockedWindPose.position = lockedWindPos;
+        lockedWindPose.rotation = txSport.rotation;
+        /*ParentConstraint constraint = ventLibre.GetComponent<ParentConstraint>();
+        GameObject go = new GameObject();
+        Vector3 fdd = txSport.forward;
+        
+
+
+        ConstraintSource constrSrc = new ConstraintSource();
+        constrSrc.sourceTransform = go.transform;
+        constrSrc.weight = 1.0f;
+        constraint.constraintActive = true;
+        constraint.SetSource(0, constrSrc);*/
+    }
     public void SetImageSpot(Transform txSport)
     {
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
@@ -122,6 +162,8 @@ public class cageState : MonoBehaviour
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
             masterAnimator.SetTrigger("Trigger1");
+            spawnWind(txSport);
+
         }
         if ((txSport.name == "Spot2") && (TrigPoint2) && _gotSpot1)
         {

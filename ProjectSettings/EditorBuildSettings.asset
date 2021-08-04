@@ -8,12 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SO/main.unity
     guid: 2fca0bbf9b4f77e4281b453dbe115597
-  - enabled: 1
-    path: Assets/test/demo2_vfx.unity
-    guid: c77270929c5d95a4ca57c1a7781b74f1
-  - enabled: 1
-    path: Assets/test/_assets/DEPTHMASK/depthMaskTest.unity
-    guid: e9d3c1439aaae094089a1888a1865c09
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: c845c3f3abf54eb48851ca992055e871, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 1157408b903c1624299cde17a0f9d55a, type: 2}
