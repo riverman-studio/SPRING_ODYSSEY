@@ -71,6 +71,7 @@ public class cageState : MonoBehaviour
             ventLibre.transform.rotation = lockedWindPose.rotation;
         }
 
+
         if (masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("12_Fin"))
         {
             if(dottedActivated)
