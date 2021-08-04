@@ -28,6 +28,8 @@ namespace Recorder
         /// </summary>
         const int HEADER_SIZE = 44;
 
+
+        static string timeStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         #endregion
 
         #region Editor Exposed Variables
@@ -45,29 +47,35 @@ namespace Recorder
         {
             audioSource = GetComponent<AudioSource>();
             animator = GetComponent<Animator>();
+
+            StartCoroutine(RequestAuthorize());
         }
 
         public void StartRecording ()
         {
             if (isWriting)
                 return;
+            if (isRecording)
+                return;
             audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
-        }
-        IEnumerator __writeRecording()
-        {
-            Recorder.Save("SO_" + System.DateTime.Now.ToString());
-            isWriting = false;
-            yield return null;
+            isRecording = true;
         }
 
         
-        public void StopRecording()
+        public void StopRecording(string filePrefix)
         {
             if (isWriting)
                 return;
             Microphone.End(Microphone.devices[0]);
             isWriting = true;
-            StartCoroutine(__writeRecording());
+            StartCoroutine(__writeRecording(filePrefix));
+        }
+        IEnumerator __writeRecording(string filePrefix)
+        {
+            Save("SO_" + filePrefix + "_" + timeStamp);
+            isWriting = false;
+            isRecording = false;
+            yield return null;
         }
 
         private void Update()
@@ -95,13 +103,21 @@ namespace Recorder
 
         #region Recorder Functions
 
-        public static void Save(string fileName = "test")
+        public void  Save(string fileName = "test")
         {
-
-            while (!(Microphone.GetPosition(null) > 0)) { }
+            string finalDirectory = Application.streamingAssetsPath;
+#if UNITY_EDITOR
+            finalDirectory = finalDirectory.Substring(0, finalDirectory.LastIndexOf('/'));
+            finalDirectory = finalDirectory.Substring(0, finalDirectory.LastIndexOf('/'));
+            finalDirectory = finalDirectory.Substring(0, finalDirectory.LastIndexOf('/'));
+            finalDirectory += "/WAVS"; 
+            /*if (!lr)
+                lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;*/
+#endif
+            //while (!(Microphone.GetPosition(Microphone.devices[0]) > 0)) { yield return null; }
             samplesData = new float[audioSource.clip.samples * audioSource.clip.channels];
             audioSource.clip.GetData(samplesData, 0);
-            string filePath = Path.Combine(Application.streamingAssetsPath, fileName + ".wav");
+            string filePath = Path.Combine(finalDirectory, fileName + ".wav");
             // Delete the file if it exists.
             if (File.Exists(filePath))
             {
@@ -116,7 +132,7 @@ namespace Recorder
             {
                 Debug.LogError("Please, Create a StreamingAssets Directory in the Assets Folder");
             }
-           
+            
         }
 
         public static byte[] ConvertWAVtoByteArray(string filePath)
@@ -217,7 +233,16 @@ namespace Recorder
                 fs.Write(bytesData, 0, bytesData.Length);
             }
         }
-
+        public IEnumerator RequestAuthorize()
+        {
+            //requestPending = true;
+            yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
+            if (Application.HasUserAuthorization(UserAuthorization.Microphone))
+            {
+                Debug.Log("auth micro");
+              //  InitMicrophone();
+            }
+        }
         #endregion
     }
 }
