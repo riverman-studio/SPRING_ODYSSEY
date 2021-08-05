@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+
 [RequireComponent(typeof(ARTrackedImageManager))]
-[RequireComponent(typeof(ARAnchorManager))]
-[RequireComponent(typeof(ARRaycastManager))]
+//[RequireComponent(typeof(ARAnchorManager))]
+//[RequireComponent(typeof(ARRaycastManager))]
 
 public class ImageTracking : MonoBehaviour
 {
     public Animator masterAnimator;
+    public Animator uiAnimator;
     [SerializeField]
     public GameObject placablePrefabs;
     private GameObject spawnedPrefabs = null;
@@ -23,15 +25,10 @@ public class ImageTracking : MonoBehaviour
 
     private ARTrackedImageManager m_trackedImageManager;
 
-
-
-
-    ARRaycastManager m_RaycastManager;
-    ARAnchorManager m_AnchorManager;
-
-    static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
-    List<ARAnchor> m_Anchors = new List<ARAnchor>();
-    List<TrackableId> m_anchorIds = new List<TrackableId>();
+    private bool imageDetected = false;
+    Coroutine _arTrackHelper = null;
+    float fTrackerTiming = 0.0f;
+    ARTrackedImage _currentlyTracking = null;
 
     public GameObject prefab
     {
@@ -42,15 +39,10 @@ public class ImageTracking : MonoBehaviour
 
     private void Awake()
     {
-        m_RaycastManager = GetComponent<ARRaycastManager>();
-        m_AnchorManager = GetComponent<ARAnchorManager>();
 
         m_trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
         spawnedPrefabs = Instantiate(placablePrefabs, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
         spawnedDetectorPrefabs = Instantiate(imageDetectorPrefab, new Vector3(0.0f, 200.0f, 0.0f), Quaternion.identity);
-
-
-
     }
 
     private void OnEnable()
@@ -62,10 +54,11 @@ public class ImageTracking : MonoBehaviour
     {
         m_trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
-    private bool added = false;
-    private bool imageDetected = false;
+
+
     private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
+
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         {
             UpdateImage(trackedImage);
@@ -74,23 +67,39 @@ public class ImageTracking : MonoBehaviour
         {
             UpdateImage(trackedImage);
         }
-        foreach (ARTrackedImage trackedImage in eventArgs.removed)
-        {
-            //spawnedDetectorPrefabs.SetActive(false);
-            imageDetected = false;
-        }
     }
     private void Update()
     {
         bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        if (imageDetected &&  bTouching)
+        //if (imageDetected && bTouching)
+        if (imageDetected)
         {
             //spawnAnchor2(spawnedPrefabs);
             cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
+            imageDetected = false;
         }
-        if(cageCtrl.isCageActivated())
+        if (cageCtrl.isCageActivated())
         {
             m_trackedImageManager.enabled = false;
+        }
+        if(m_trackedImageManager.enabled)
+        {
+            if(_currentlyTracking)
+            {
+                if (_currentlyTracking.trackingState != TrackingState.Tracking)
+                {
+                    spawnedDetectorPrefabs.transform.position.Set(0.0f, 1000.0f, 0.0f);
+                    imageDetected = false;
+                    if (_arTrackHelper != null)
+                    {
+                        StopCoroutine(_arTrackHelper);
+                        fTrackerTiming = 0.0f;
+                        _arTrackHelper = null;
+                        _currentlyTracking = null;
+                        uiAnimator.SetFloat("Fill", fTrackerTiming);
+                    }
+                }
+            }
         }
     }
     private void UpdateImage(ARTrackedImage trackedImage)
@@ -102,175 +111,46 @@ public class ImageTracking : MonoBehaviour
             go = true;
         else if ((TrigPoint2) && (trackedImage.referenceImage.name == "Spot2"))
             go = true;
-
+        _currentlyTracking = trackedImage;
         //spawnedDetectorPrefabs.SetActive(true);
         imageDetected = false;
-        if(go)
+        if (go)
         {
-            spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
-            spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
-            spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
-            imageDetected = true;
-        }
-        else
-        {
-            spawnedDetectorPrefabs.transform.position.Set(0.0f, 1000.0f, 0.0f);
-        }
+            if (_arTrackHelper == null)
+            {
+                _arTrackHelper = StartCoroutine(__timeArHelper());
+            }
+            if (_arTrackHelper != null)
+            {
+                if (fTrackerTiming > 2.0f)
+                {
+                    spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
+                    spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
+                    spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
+                    imageDetected = true;
+                    if (_arTrackHelper != null)
+                    {
+                        StopCoroutine(_arTrackHelper);
+                        fTrackerTiming = 0.0f;
+                        _arTrackHelper = null;
+                    }
+                }
+            }
 
-        
+        }
     }
-    public void spawnAnchor2(GameObject trackedImage)
+    
+    IEnumerator __timeArHelper()
     {
-        bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        if (!bTouching)
-            return;
-        if (added)
-            return;
-
-        Debug.Log("sending ray");
-        Transform cameraTransform = Camera.main.transform;
-
-        // Raycast against planes and feature points
-        const TrackableType trackableTypes =
-            TrackableType.FeaturePoint |
-            TrackableType.PlaneWithinPolygon;
-
-        Vector3 vDir = (trackedImage.transform.position - cameraTransform.position).normalized;
-        Ray ray = new Ray(cameraTransform.position, vDir);
-
-        // Perform the raycast
-        if (m_RaycastManager.Raycast(ray, s_Hits, trackableTypes))
+        while(fTrackerTiming < 2.3f)
         {
-            // Raycast hits are sorted by distance, so the first one will be the closest hit.
-            ARRaycastHit hit = s_Hits[0];
-
-            // Create a new anchor
-            Pose anchorPose = new Pose(trackedImage.transform.position, hit.pose.rotation);
-            var anchor = CreateAnchor(hit, anchorPose);
-            added = true;
-
-            //delete all anchors
-            foreach (ARAnchor oldanchor in m_Anchors)
-            {
-                Destroy(oldanchor.gameObject);
-            }
-            m_Anchors.Clear();
-
-
-
-            if (!anchor)
-            {
-                // Remember the anchor so we can remove it later.
-                m_Anchors.Add(anchor);
-                m_anchorIds.Add(anchor.trackableId);
-            }
-            else
-            {
-                Debug.Log("Error creating anchor");
-            }
+            uiAnimator.SetFloat("Fill", fTrackerTiming);
+            fTrackerTiming += Time.deltaTime;
+            yield return null;
         }
-        else
-        {
-            Debug.Log("Ray cast not hitting");
-        }
+        yield return null;
     }
 
-    public void spawnAnchor(ARTrackedImage trackedImage)
-    {
-        bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        if (!bTouching)
-            return;
-        if (added)
-            return;
 
-        Debug.Log("sending ray");
-        Transform cameraTransform = Camera.main.transform;
-
-        // Raycast against planes and feature points
-        const TrackableType trackableTypes =
-            TrackableType.FeaturePoint |
-            TrackableType.PlaneWithinPolygon;
-
-        Vector3 vDir = (trackedImage.transform.position - cameraTransform.position).normalized;
-        Ray ray = new Ray(cameraTransform.position, vDir);
-
-        // Perform the raycast
-        if (m_RaycastManager.Raycast(ray, s_Hits, trackableTypes))
-        {
-            // Raycast hits are sorted by distance, so the first one will be the closest hit.
-            ARRaycastHit hit = s_Hits[0];
-
-            // Create a new anchor
-            Pose anchorPose = new Pose(trackedImage.transform.position, hit.pose.rotation);
-            var anchor = CreateAnchor(hit, anchorPose);
-            added = true;
-
-            //delete all anchors
-            foreach (ARAnchor oldanchor in m_Anchors)
-            {
-                Destroy(oldanchor.gameObject);
-            }
-            m_Anchors.Clear();
-
-
-
-            if (!anchor)
-            {
-                // Remember the anchor so we can remove it later.
-                m_Anchors.Add(anchor);
-                m_anchorIds.Add(anchor.trackableId);
-            }
-            else
-            {
-                Debug.Log("Error creating anchor");
-            }
-        }
-        else
-        {
-            Debug.Log("Ray cast not hitting");
-        }
-    }
-    // Start is called before the first frame update
-    ARAnchor CreateAnchor(in ARRaycastHit hit, Pose anchorPose)
-    {
-        ARAnchor anchor = null;
-
-
-
-        // If we hit a plane, try to "attach" the anchor to the plane
-        if (hit.trackable is ARPlane plane)
-        {
-            var planeManager = GetComponent<ARPlaneManager>();
-            if (planeManager)
-            {
-                Debug.Log("Creating anchor attachment.");
-                var oldPrefab = m_AnchorManager.anchorPrefab;
-                m_AnchorManager.anchorPrefab = prefab;
-                anchor = m_AnchorManager.AttachAnchor(plane, anchorPose);
-                m_AnchorManager.anchorPrefab = oldPrefab;
-                return anchor;
-            }
-        }
-        else
-        {
-            Debug.Log("ARPlane not hit");
-        }
-
-        // Otherwise, just create a regular anchor at the hit pose
-        Debug.Log("Creating regular anchor.");
-
-        // Note: the anchor can be anywhere in the scene hierarchy
-        var gameObject = Instantiate(prefab, anchorPose.position, anchorPose.rotation);
-
-        // Make sure the new GameObject has an ARAnchor component
-        anchor = gameObject.GetComponent<ARAnchor>();
-        if (anchor == null)
-        {
-            anchor = gameObject.AddComponent<ARAnchor>();
-        }
-
-
-        return anchor;
-    }
 }
 

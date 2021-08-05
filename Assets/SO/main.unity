@@ -8107,8 +8107,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11130,6 +11129,18 @@ MonoBehaviour:
             m_StringArgument: Store
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1119169714}
+          m_TargetAssemblyTypeName: soGameplay, Assembly-CSharp
+          m_MethodName: btnStopRecording
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
@@ -11144,6 +11155,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Record
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1119169714}
+          m_TargetAssemblyTypeName: soGameplay, Assembly-CSharp
+          m_MethodName: btnStartRecording
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &346819375
@@ -49824,7 +49847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649417832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
@@ -49870,6 +49893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterAnimator: {fileID: 1119169708}
+  uiAnimator: {fileID: 875485463}
   placablePrefabs: {fileID: 5349813781926690598, guid: b942083a1d9a9cb4197d3d7f590a02fe, type: 3}
   cageCtrl: {fileID: 907706376}
   imageDetectorPrefab: {fileID: 6862021975033422745, guid: b71572c742dc49e499c8bbf5df39750a, type: 3}

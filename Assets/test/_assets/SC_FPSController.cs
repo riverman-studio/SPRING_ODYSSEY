@@ -43,6 +43,20 @@ public class SC_FPSController : MonoBehaviour
         }
         
     }
+    void OnDisable()
+    {
+        Debug.Log("PrintOnDisable: script was disabled");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("PrintOnEnable: script was enabled");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
 
     void Update()
     {

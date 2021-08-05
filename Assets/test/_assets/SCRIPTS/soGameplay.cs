@@ -13,25 +13,20 @@ public class soGameplay : MonoBehaviour
     private RecordingState _recordingState = RecordingState.NotRecording;
 
     float _fRecordingTime = 0.0f;
-    bool _recodingMaintained = false;
     public Button recordButton;
     void Awake()
     {
         _timelineAnimator = GetComponent<Animator>();
         _recorder = GetComponent<Recorder.Recorder>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         bool microVent = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("03_MicroVent");
         bool chuchoter = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("11_Chuchoter");
-        string filePrefix = "";
-        if (microVent)
-            filePrefix = "_REC-1_";
-        if (chuchoter)
-            filePrefix = "_REC-2_";
-        if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicIdleLoop"))
+
+        if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicFadeIn"))
         {
             _recordingState = RecordingState.NotRecording;
         }
@@ -43,35 +38,47 @@ public class soGameplay : MonoBehaviour
                 _recordingState = RecordingState.KickRecording;
             }
         }
-        if (_recordingState == RecordingState.KickRecording)
-        {
-            if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicIdleAnimVu"))
-            {
-                _fRecordingTime = 0.0f;
-                StartCoroutine(__kickRecording());
-                _recordingState = RecordingState.Recording;
-            }
-        }
-        if (_recordingState == RecordingState.Recording)
-        {
-            if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicOut"))
-            {
-                _recorder.StopRecording(filePrefix);
-                _recordingState = RecordingState.NotRecording;
-                if (microVent)
-                    _timelineAnimator.SetTrigger("Recorded1");
-                if (chuchoter)
-                    _timelineAnimator.SetTrigger("Recorded2");
-            }
-        }
-        _recodingMaintained = false;
     }
 
-    public void maintainRecording()
+    public void btnStartRecording()
     {
-        MicroAnimator.SetTrigger("Record");
-        _recodingMaintained = true;
+        if (_recordingState == RecordingState.KickRecording)
+        {
+            //if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicIdleAnimVu"))
+            {
+                _recordingState = RecordingState.Recording;
+                StartCoroutine(__kickRecording());
+            }
+        }
     }
+
+    public void btnStopRecording()
+    {
+        if (_recordingState == RecordingState.Recording)
+        {
+            string filePrefix = "";
+            bool microVent = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("03_MicroVent");
+            bool chuchoter = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("11_Chuchoter");
+            if (microVent)
+                filePrefix = "_REC-1_";
+            if (chuchoter)
+                filePrefix = "_REC-2_";
+            _recorder.StopRecording(filePrefix);
+            _recordingState = RecordingState.NotRecording;
+            if (microVent)
+                _timelineAnimator.SetTrigger("Recorded1");
+            if (chuchoter)
+                _timelineAnimator.SetTrigger("Recorded2");
+        }
+    }
+
+    /*IEnumerator __autocompleteAnimator_KRAKRA(string Trig)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _timelineAnimator.SetTrigger(Trig);
+        yield return null;
+    }*/
+
 
     IEnumerator __kickRecording()
     {
