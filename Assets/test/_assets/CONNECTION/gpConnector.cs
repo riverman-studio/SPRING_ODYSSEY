@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.UI;
-
+using UnityEngine.Animations;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -81,6 +82,17 @@ public class gpConnector : MonoBehaviour
 
 #if UNITY_EDITOR
 
+    private static string GetGameObjectPath(Transform transform)
+    {
+        string path = transform.name;
+        while (transform.parent != null)
+        {
+            transform = transform.parent;
+            path = transform.name + "/" + path;
+        }
+        return path;
+    }
+
 
     [MenuItem("SO / Update Linerenderer")]
     static void AddLineRenderer()
@@ -89,57 +101,34 @@ public class gpConnector : MonoBehaviour
         string vfxAsset = "Assets/test/_assets/CONNECTION/src/connectionFX.vfx";
         Material SRm = (Material)AssetDatabase.LoadAssetAtPath(cageMat, typeof(Material));
 
+        
 
-        GameObject currGo = Selection.gameObjects[0];
 
-        cageState.spawnCages(currGo.transform);
-       /* if ((currGo.name == "lineCAGE") || (currGo.name == "dottedCAGE"))
+        GameObject lienRoot = GameObject.Find("LINE_Root"); 
+        GameObject dottedRoot = GameObject.Find("DOTTED_Root");
+
+        string lienRootPath = GetGameObjectPath(lienRoot.transform);
+        string dottedRootPath = GetGameObjectPath(dottedRoot.transform);
+        
+
+        ParentConstraint[] parentContrs = lienRoot.GetComponentsInChildren<ParentConstraint>();
+
+        foreach (ParentConstraint pc in parentContrs)
         {
-            Transform structure2 = currGo.transform.GetChild(0);
-            //Material connMat = currGo.GetComponent<gpConnector>().connectorMat;
-            for(int j =0; j< structure2.childCount; j++)
-            {
-                for (int i = 0; i < structure2.GetChild(j).childCount; i++)
-                {
-                    Transform ln = structure2.GetChild(j).GetChild(i);
-                    if (!ln.name.StartsWith("cv_"))
-                        continue;
-                    LineRenderer lr = null;
-                    lr = ln.GetComponent<LineRenderer>();
-                    if (!lr)
-                        lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
-                    Transform pt1 = ln.GetChild(0);
-                    Transform pt2 = ln.GetChild(1);
-                    Vector3[] positions = new Vector3[2];
-                    positions[0] = new Vector3(0, 0, 0);
-                    positions[0] = pt1.position;
-                    positions[1] = new Vector3(0, 0, 0);
-                    positions[1] = pt2.position;
-                    lr.positionCount = positions.Length;
-                    lr.SetPositions(positions);
-                    lr.material = SRm;
-                    lr.startWidth = 0.01f;
-                    lr.textureMode = LineTextureMode.Tile;
-                }
-            }
-        }*/
-        /*else
-        {
-            //Material connMat = currGo.GetComponent<gpConnector>().connectorMat;
-            for (int i = 0; i < currGo.transform.childCount; i++)
-            {
-                Transform ln = currGo.transform.GetChild(i);
-                VisualEffect vfx = ln.gameObject.AddComponent<VisualEffect>();
-                if (!vfx)
-                    continue;
-                vfx.visualEffectAsset = (VisualEffectAsset)AssetDatabase.LoadAssetAtPath(vfxAsset, typeof(VisualEffectAsset));
-                Transform pt1 = ln.GetChild(0);
-                Transform pt2 = ln.GetChild(1);
-                vfx.SetVector3("startPoint", pt1.position);
-                vfx.SetVector3("endPoint", pt2.position);
-            }
-        }*/
+            string lienGoPath = GetGameObjectPath(pc.gameObject.transform);
 
+            
+            string dottedGoPath = lienGoPath.Replace("LINE_Root", "DOTTED_Root");
+            dottedGoPath = dottedGoPath.Replace("lineCAGE", "dottedCAGE");
+
+            //Debug.Log(dottedGoPath);
+            GameObject dottedNode = GameObject.Find(dottedGoPath);
+            dottedNode.transform.localPosition = pc.gameObject.transform.localPosition;
+        }
+
+
+        cageState.spawnCages(lienRoot.transform);
+        cageState.spawnCages(dottedRoot.transform);
     }
 
     /*
@@ -164,6 +153,50 @@ public class gpConnector : MonoBehaviour
             }
         }
     }*/
+    [MenuItem("SO / copyTransforms")]
+    static void copyTransforms()
+    {
+        GameObject lienRoot = GameObject.Find("lineCAGE");
+        GameObject dottedRoot = GameObject.Find("dottedCAGE");
+
+        Transform lineStructure2 = lienRoot.transform.GetChild(0);
+        Transform dottedStructure2 = dottedRoot.transform.GetChild(0);
+
+        for (int i=0; i< lineStructure2.childCount; i++)
+        {
+            Transform lsLV = lineStructure2.GetChild(i);
+            for (int j = 0; j < lsLV.childCount; j++)
+            {
+                Transform lscv = lsLV.GetChild(j);
+                string lscvPath = GetGameObjectPath(lscv);
+                string dscvPath = lscvPath.Replace("LINE_Root", "DOTTED_Root");
+                dscvPath = dscvPath.Replace("lineCAGE", "dottedCAGE");
+                if (lscvPath.Contains("cv_L2_18"))
+                {
+                    int brk = 0;
+
+                }
+                GameObject _go = GameObject.Find(dscvPath);
+                if (_go == null)
+                    continue;
+                try
+                {
+                    Transform dscv = _go.transform;
+                    dscv.localPosition = lscv.localPosition;
+                    dscv.GetChild(0).localPosition = lscv.GetChild(0).localPosition;
+                    dscv.GetChild(1).localPosition = lscv.GetChild(1).localPosition;
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(dscvPath);
+                }
+
+
+            }
+        }
+
+    }
+
     [MenuItem("SO / set line render width")]
     static void SetLineRendererWidth()
     {
@@ -206,7 +239,7 @@ public class gpConnector : MonoBehaviour
             lr.SetColors(Color.white, Color.white);
 
         }
-    }
+    }/*
 
     [MenuItem("SO / correctCageBars")]
     static void correctCageBars()
@@ -248,7 +281,7 @@ public class gpConnector : MonoBehaviour
             }
         }
     }
-
+    */
 
 #endif
 }

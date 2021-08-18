@@ -239,25 +239,34 @@ public class cageState : MonoBehaviour
                     Transform ln = structure2.GetChild(j).GetChild(i);
                     if (!ln.name.StartsWith("cv_"))
                         continue;
+                    Transform pt1 = ln.GetChild(0);
+                    Transform pt2 = ln.GetChild(1);
+
                     LineRenderer lr = null;
                     lr = ln.GetComponent<LineRenderer>();
 #if UNITY_EDITOR
                     /*if (!lr)
                         lr = ln.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;*/
 #endif
-                    if (!lr)
-                        continue;
-                    Transform pt1 = ln.GetChild(0);
-                    Transform pt2 = ln.GetChild(1);
-                    Vector3[] positions = new Vector3[2];
-                    positions[0] = new Vector3(0, 0, 0);
-                    positions[0] = pt1.position;
-                    positions[1] = new Vector3(0, 0, 0);
-                    positions[1] = pt2.position;
-                    lr.positionCount = positions.Length;
-                    lr.SetPositions(positions);
-                    lr.startWidth = 0.01f;
-                    lr.textureMode = LineTextureMode.Tile;
+                    if (lr)
+                    {
+                        Vector3[] positions = new Vector3[2];
+                        positions[0] = new Vector3(0, 0, 0);
+                        positions[0] = pt1.position;
+                        positions[1] = new Vector3(0, 0, 0);
+                        positions[1] = pt2.position;
+                        lr.positionCount = positions.Length;
+                        lr.SetPositions(positions);
+                        lr.startWidth = 0.01f;
+                        lr.textureMode = LineTextureMode.Tile;
+                    }
+
+                    VisualEffect vfx = ln.GetComponent<VisualEffect>();
+                    if (vfx)
+                    {
+                        vfx.SetVector3("startPoint", pt1.localPosition);
+                        vfx.SetVector3("endPoint", pt2.localPosition);
+                    }
                 }
             }
         }
