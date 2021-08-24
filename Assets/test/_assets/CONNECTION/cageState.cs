@@ -59,6 +59,10 @@ public class cageState : MonoBehaviour
                 if (!dottedActivated)
                 {
                     Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position).normalized * (float) cagePositionUnits);
+                    if (Application.platform != RuntimePlatform.IPhonePlayer)
+                    {
+                        newPos = _spot1.position + ((_spot2.position - _spot1.position) * 1.5f);
+                    }
                     setCagePosition(newPos, Quaternion.identity);
                 }
                 setColorOfCage(dottedCage, dottedCageAlpha);
@@ -144,9 +148,12 @@ public class cageState : MonoBehaviour
     }
     void spawnWind(Transform txSport)
     {
-        ventFixe.position = txSport.position + (txSport.forward * (float)ventFixePositionUnit);
-        ventLibre.position = txSport.position + (txSport.forward * (float)ventLibrePositionUnit);
+        float fMux = 1.0f;
+        if (Application.platform != RuntimePlatform.IPhonePlayer)
+            fMux = -1.0f;
 
+        ventFixe.position = txSport.position + (txSport.forward * (float)ventFixePositionUnit * fMux);
+        lockedWindPose.position = txSport.position + (txSport.forward * (float)ventLibrePositionUnit * fMux);
         /*ParentConstraint constraint = ventLibre.GetComponent<ParentConstraint>();
         GameObject go = new GameObject();
         Vector3 fdd = txSport.forward;

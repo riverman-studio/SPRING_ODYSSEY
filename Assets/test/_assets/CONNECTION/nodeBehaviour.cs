@@ -172,9 +172,6 @@ public class nodeBehaviour : templateBehaviour
             float invFDot = 1.0f - Mathf.Abs(Vector3.Dot(drawDirection, cameraTransform.forward));
             float distFactor = 1.0f - Mathf.Clamp01(fDist / fDistDrawLine);
             blipRate = Mathf.Lerp(3.0f, 16.0f, Mathf.Sqrt(invFDot * distFactor));
-            Debug.Log(blipRate);
-
-
 
         }
         if (bTouching)

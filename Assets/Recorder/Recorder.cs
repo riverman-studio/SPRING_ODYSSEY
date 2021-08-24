@@ -57,7 +57,8 @@ namespace Recorder
                 return;
             if (isRecording)
                 return;
-            audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+            if(Microphone.devices.Length > 0)
+                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
             isRecording = true;
         }
 
@@ -66,13 +67,15 @@ namespace Recorder
         {
             if (isWriting)
                 return;
-            Microphone.End(Microphone.devices[0]);
+            if (Microphone.devices.Length > 0)
+                Microphone.End(Microphone.devices[0]);
             isWriting = true;
             StartCoroutine(__writeRecording(filePrefix));
         }
         IEnumerator __writeRecording(string filePrefix)
         {
-            Save("SO_" + filePrefix + "_" + timeStamp);
+            if (Microphone.devices.Length > 0)
+                Save("SO_" + filePrefix + "_" + timeStamp);
             isWriting = false;
             isRecording = false;
             yield return null;
