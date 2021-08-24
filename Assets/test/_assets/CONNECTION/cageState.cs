@@ -51,7 +51,7 @@ public class cageState : MonoBehaviour
             {
                 if (!dottedActivated)
                 {
-                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position) * 2.0f);
+                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position) * 5.0f);
                     setCagePosition(newPos, Quaternion.identity);
                 }
                 setColorOfCage(dottedCage, dottedCageAlpha);
