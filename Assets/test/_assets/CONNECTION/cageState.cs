@@ -10,11 +10,18 @@ public class cageState : MonoBehaviour
     
 
     public GameObject dottedCage;
+    public Transform ventFixe;
+    public int ventFixePositionUnit = 1;
+
     public Transform ventLibre;
+    public int ventLibrePositionUnit = 3;
+
     public float dottedCageAlpha = 0.0f;
 
     public GameObject lineCage;
     public float lineCageAlpha = 0.0f;
+
+    public int cagePositionUnits = 4;
 
     // Start is called before the first frame update
     private Pose _spot1;
@@ -51,7 +58,7 @@ public class cageState : MonoBehaviour
             {
                 if (!dottedActivated)
                 {
-                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position) * 5.0f);
+                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position).normalized * (float) cagePositionUnits);
                     setCagePosition(newPos, Quaternion.identity);
                 }
                 setColorOfCage(dottedCage, dottedCageAlpha);
@@ -137,9 +144,9 @@ public class cageState : MonoBehaviour
     }
     void spawnWind(Transform txSport)
     {
-        Vector3 lockedWindPos = txSport.position + (txSport.forward * -1.5f);
-        lockedWindPose.position = lockedWindPos;
-        lockedWindPose.rotation = txSport.rotation;
+        ventFixe.position = txSport.position + (txSport.forward * (float)ventFixePositionUnit);
+        ventLibre.position = txSport.position + (txSport.forward * (float)ventLibrePositionUnit);
+
         /*ParentConstraint constraint = ventLibre.GetComponent<ParentConstraint>();
         GameObject go = new GameObject();
         Vector3 fdd = txSport.forward;
