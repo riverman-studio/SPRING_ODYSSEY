@@ -2473,7 +2473,6 @@ GameObject:
   m_Component:
   - component: {fileID: 57937242}
   - component: {fileID: 57937243}
-  - component: {fileID: 57937244}
   m_Layer: 0
   m_Name: PlantCtrl
   m_TagString: Untagged
@@ -2515,21 +2514,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &57937244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57937241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46c609e4f1dbebc4b83f4e7afaca969a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  childAnimator: {fileID: 57937243}
-  triggerName: Moan
-  triggerValue: 0
 --- !u!1 &59919022
 GameObject:
   m_ObjectHideFlags: 0
