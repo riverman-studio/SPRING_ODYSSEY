@@ -176,7 +176,8 @@ public class cageState : MonoBehaviour
             _spot1.position = txSport.position;
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
-            masterAnimator.SetTrigger("Trigger1");
+            //masterAnimator.SetTrigger("Trigger1");
+            StartCoroutine(__delayTrig("Trigger1"));
             spawnWind(txSport);
 
         }
@@ -185,7 +186,8 @@ public class cageState : MonoBehaviour
             _spot2.position = txSport.position;
             _spot2.rotation = txSport.rotation;
             _gotSpot2 = true;
-            masterAnimator.SetTrigger("Trigger2");
+            //masterAnimator.SetTrigger("Trigger2");
+            StartCoroutine(__delayTrig("Trigger2"));
         }
        /* if (_gotSpot1 && _gotSpot2 && !dottedActivated)
         {
@@ -194,6 +196,12 @@ public class cageState : MonoBehaviour
         }*/
     }
 
+    IEnumerator __delayTrig(string trigName)
+    {
+        yield return new WaitForSeconds(1.0f);
+        masterAnimator.SetTrigger(trigName);
+        yield return null;
+    }
     public void setCagePosition(Vector3 pos, Quaternion quat)
     {
         lineCage.SetActive(true);
