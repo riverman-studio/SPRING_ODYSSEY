@@ -108,10 +108,7 @@ public class radiationBoum : MonoBehaviour
 
         for (int i = 0; i < strandTx.Count; i++)
         {
-            Color fadeColor = Color.white;
-            Renderer rnderer = strandTx[i];
-            fadeColor.a = 0.0f;
-            setColor(rnderer, fadeColor);
+            GameObject.Destroy(strandTx[i].gameObject);
         }
 
         yield return null;
