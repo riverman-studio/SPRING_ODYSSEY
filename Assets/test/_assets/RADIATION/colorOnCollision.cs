@@ -75,10 +75,14 @@ public class colorOnCollision : MonoBehaviour
         {
             fDelta += Time.deltaTime * 1.0f;
             Color fadingCOlor = Color.Lerp(startColor, radColor, fDelta);
-            fadingCOlor.a = seedRenderer.material.color.a;
-            seedRenderer.material.SetColor("_BaseColor", fadingCOlor);
-            //seedRenderer.material.SetColor("_Color", fadingCOlor);
-            seedRenderer.material.SetColor("_EmissionColor", fadingCOlor);
+            if(seedRenderer != null)
+            {
+                fadingCOlor.a = seedRenderer.material.color.a;
+                seedRenderer.material.SetColor("_BaseColor", fadingCOlor);
+                //seedRenderer.material.SetColor("_Color", fadingCOlor);
+                seedRenderer.material.SetColor("_EmissionColor", fadingCOlor);                
+            }
+
             yield return null;
         }
         yield return null;

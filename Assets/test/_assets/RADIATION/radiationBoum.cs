@@ -106,10 +106,11 @@ public class radiationBoum : MonoBehaviour
             yield return null;
         }
 
-        for (int i = 0; i < strandTx.Count; i++)
-        {
-            GameObject.Destroy(strandTx[i].gameObject);
-        }
+        // for (int i = 0; i < strandTx.Count; i++)
+        // {
+            
+        // }
+        GameObject.Destroy(gameObject);
 
         yield return null;
     }

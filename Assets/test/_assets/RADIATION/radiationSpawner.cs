@@ -22,7 +22,8 @@ public class radiationSpawner : MonoBehaviour
     {
         if(boom)
         {
-            _unitRadiationAnimator.SetTrigger("Boum");
+            if(_unitRadiationAnimator != null)
+                _unitRadiationAnimator.SetTrigger("Boum");
         }
     }
 }
