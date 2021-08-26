@@ -25544,8 +25544,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 740620314}
-  - component: {fileID: 740620315}
   - component: {fileID: 740620316}
+  - component: {fileID: 740620315}
   m_Layer: 0
   m_Name: PlantTaches
   m_TagString: Untagged
@@ -72223,15 +72223,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2671326198981428306, guid: 818ec94098518c64fb7d402d8189aeff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09353
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -2671326198981428306, guid: 818ec94098518c64fb7d402d8189aeff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.785975
+      value: 4.14
       objectReference: {fileID: 0}
     - target: {fileID: -2671326198981428306, guid: 818ec94098518c64fb7d402d8189aeff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.034751
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: -2671326198981428306, guid: 818ec94098518c64fb7d402d8189aeff, type: 3}
       propertyPath: m_LocalRotation.w
