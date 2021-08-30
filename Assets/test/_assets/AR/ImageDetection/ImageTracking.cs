@@ -26,8 +26,6 @@ public class ImageTracking : MonoBehaviour
     private ARTrackedImageManager m_trackedImageManager;
 
     private bool imageDetected = false;
-    Coroutine _arTrackHelper = null;
-    float fTrackerTiming = 0.0f;
     ARTrackedImage _currentlyTracking = null;
 
     public GameObject prefab
@@ -68,88 +66,79 @@ public class ImageTracking : MonoBehaviour
             UpdateImage(trackedImage);
         }
     }
+  
     private void Update()
     {
         bool bTouching = (Input.touches.Length > 0) || (Input.GetMouseButton(0));
-        //if (imageDetected && bTouching)
-        if (imageDetected)
+        bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
+        bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
+        bool inUITargetLoop = uiAnimator.GetCurrentAnimatorStateInfo(0).IsName("TargetLoop");
+        bool inUITargetFill = uiAnimator.GetCurrentAnimatorStateInfo(0).IsName("TargetFill");
+        bool inUITargetFadeOut = uiAnimator.GetCurrentAnimatorStateInfo(0).IsName("TargetFadeOut");
+
+        if ((TrigPoint1 || TrigPoint2) && (inUITargetLoop || inUITargetFill))
         {
-            //spawnAnchor2(spawnedPrefabs);
-            cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
-            imageDetected = false;
+            m_trackedImageManager.enabled = true;
         }
-        if (cageCtrl.isCageActivated())
+        else
         {
             m_trackedImageManager.enabled = false;
+            uiAnimator.SetBool("is_detected", false);
         }
-        if(m_trackedImageManager.enabled)
+            
+
+
+
+
+        if (m_trackedImageManager.enabled)
         {
             if(_currentlyTracking)
             {
                 if (_currentlyTracking.trackingState != TrackingState.Tracking)
                 {
                     spawnedDetectorPrefabs.transform.position.Set(0.0f, 1000.0f, 0.0f);
+                    spawnedDetectorPrefabs.name = "";
                     imageDetected = false;
-                    if (_arTrackHelper != null)
-                    {
-                        StopCoroutine(_arTrackHelper);
-                        fTrackerTiming = 0.0f;
-                        _arTrackHelper = null;
-                        _currentlyTracking = null;
-                        uiAnimator.SetFloat("Fill", fTrackerTiming);
-                    }
+                    uiAnimator.SetBool("is_detected", false);
                 }
             }
         }
+        if (inUITargetFadeOut)
+        {
+            spawnedDetectorPrefabs.transform.position = _currentlyTracking.transform.position;
+            spawnedDetectorPrefabs.transform.rotation = _currentlyTracking.transform.rotation;
+            spawnedDetectorPrefabs.name = _currentlyTracking.referenceImage.name;
+            //if (imageDetected)
+            if(true)
+            {
+                //spawnAnchor2(spawnedPrefabs);
+                cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
+                imageDetected = false;
+                _currentlyTracking = null;
+            }
+        }
+
+
     }
+    
     private void UpdateImage(ARTrackedImage trackedImage)
     {
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
         bool go = false;
-        if ((TrigPoint1) && (trackedImage.referenceImage.name == "Spot1"))
+        if (TrigPoint1 || TrigPoint2)
             go = true;
-        else if ((TrigPoint2) && (trackedImage.referenceImage.name == "Spot2"))
-            go = true;
+
         _currentlyTracking = trackedImage;
         //spawnedDetectorPrefabs.SetActive(true);
         imageDetected = false;
         if (go)
         {
-            if (_arTrackHelper == null)
-            {
-                _arTrackHelper = StartCoroutine(__timeArHelper());
-            }
-            if (_arTrackHelper != null)
-            {
-                if (fTrackerTiming > 2.0f)
-                {
-                    spawnedDetectorPrefabs.transform.position = trackedImage.transform.position;
-                    spawnedDetectorPrefabs.transform.rotation = trackedImage.transform.rotation;
-                    spawnedDetectorPrefabs.name = trackedImage.referenceImage.name;
-                    imageDetected = true;
-                    if (_arTrackHelper != null)
-                    {
-                        StopCoroutine(_arTrackHelper);
-                        fTrackerTiming = 0.0f;
-                        _arTrackHelper = null;
-                    }
-                }
-            }
-
+            imageDetected = true;
+            uiAnimator.SetBool("is_detected", true);
         }
     }
     
-    IEnumerator __timeArHelper()
-    {
-        while(fTrackerTiming < 2.3f)
-        {
-            uiAnimator.SetFloat("Fill", fTrackerTiming);
-            fTrackerTiming += Time.deltaTime;
-            yield return null;
-        }
-        yield return null;
-    }
 
 
 }

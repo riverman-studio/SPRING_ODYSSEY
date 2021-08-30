@@ -171,7 +171,7 @@ public class cageState : MonoBehaviour
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
        
-         if ((txSport.name == "Spot1") && (TrigPoint1))
+         if ((txSport.name == "Spot1") && (TrigPoint1) && !_gotSpot1)
         {
             _spot1.position = txSport.position;
             _spot1.rotation = txSport.rotation;
@@ -181,7 +181,7 @@ public class cageState : MonoBehaviour
             spawnWind(txSport);
 
         }
-        if ((txSport.name == "Spot2") && (TrigPoint2) && _gotSpot1)
+        if ((txSport.name == "Spot2") && (TrigPoint2) && _gotSpot1 && !_gotSpot2)
         {
             _spot2.position = txSport.position;
             _spot2.rotation = txSport.rotation;
