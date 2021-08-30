@@ -135,7 +135,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlantIdleAnim 0
+  m_Name: dleAnim 0Anim 0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -149,7 +149,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2e367d84a302eac48bc8bdbf0a0e5f9f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 84ce4ae39b45b954ebdbc003dd686768, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -213,7 +213,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2e367d84a302eac48bc8bdbf0a0e5f9f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 84ce4ae39b45b954ebdbc003dd686768, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
