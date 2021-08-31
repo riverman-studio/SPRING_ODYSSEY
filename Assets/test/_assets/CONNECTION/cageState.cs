@@ -45,9 +45,36 @@ public class cageState : MonoBehaviour
     {
         return dottedActivated;
     }
+
+    void updateUserPos()
+    {
+        //Camera.main.transform.position;
+
+         
+        bool stChercheAide = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("09_VentChercheAide");
+        //stChercheAide = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("02_IntroTitre");
+
+        if (stChercheAide)
+        {
+            Vector3 cameraPosition = Camera.main.transform.position;
+            //Vector3 cagePosition = _spot1.position;
+            Vector3 cagePosition = gameObject.transform.position;
+
+            cameraPosition.y = 0.0f;
+            cagePosition.y = 0.0f;
+            float fDist = Vector3.Distance(cameraPosition, cagePosition);
+            //Debug.Log("Perimeter: " + fDist.ToString());
+            if(fDist < 1.0f)
+            {
+                masterAnimator.SetTrigger("Trigger4");
+            }
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
+        updateUserPos();
         bool TrigPoint1 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("01_ARTrigger01");
         bool TrigPoint2 = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("05_ARTrigger02 1");
 
