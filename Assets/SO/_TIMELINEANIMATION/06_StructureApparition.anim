@@ -520,7 +520,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: _driveValue
-    path: LOCKEDWIND/VENT/VentCtrlVoice/_VentAsset/VentCtrl/VentBase
+    path: CAGE/VENT/VentCtrlVoice/_VentAsset/VentCtrl/VentBase
     classID: 114
     script: {fileID: 11500000, guid: f206c9614deb9444e9baaf8090a44fdd, type: 3}
   m_PPtrCurves: []
@@ -602,7 +602,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4112347955
+      path: 752429537
       attribute: 2217318162
       script: {fileID: 11500000, guid: f206c9614deb9444e9baaf8090a44fdd, type: 3}
       typeID: 114
@@ -1133,7 +1133,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: _driveValue
-    path: LOCKEDWIND/VENT/VentCtrlVoice/_VentAsset/VentCtrl/VentBase
+    path: CAGE/VENT/VentCtrlVoice/_VentAsset/VentCtrl/VentBase
     classID: 114
     script: {fileID: 11500000, guid: f206c9614deb9444e9baaf8090a44fdd, type: 3}
   m_EulerEditorCurves: []

@@ -324,7 +324,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 02_IntroTitre
-  m_Speed: 1
+  m_Speed: 100
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8175824339458637212}
@@ -632,7 +632,7 @@ AnimatorStateMachine:
     m_Position: {x: 450, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3948934161163774282}
-    m_Position: {x: 780, y: 80, z: 0}
+    m_Position: {x: 840, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6596760816573547100}
     m_Position: {x: 950, y: -70, z: 0}
@@ -678,7 +678,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 210, y: -90, z: 0}
   m_ExitPosition: {x: 990, y: 420, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 6434057953432445478}
+  m_DefaultState: {fileID: -7240531585333208484}
 --- !u!114 &4623268777080565727
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -706,7 +706,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 04_VentLibre 1
-  m_Speed: 1
+  m_Speed: 10
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8026244158955879349}
