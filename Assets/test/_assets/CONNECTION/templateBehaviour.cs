@@ -49,7 +49,7 @@ public class templateBehaviour : MonoBehaviour
             lr.endColor = dcol;
             lr.SetColors(dcol, dcol);
 
-            fDelta += (Time.deltaTime * 0.3f); //disparition 3X plus lent
+            fDelta += (Time.deltaTime * 0.1f); //disparition 3X plus lent
             yield return null;
         }
         yield return null;
