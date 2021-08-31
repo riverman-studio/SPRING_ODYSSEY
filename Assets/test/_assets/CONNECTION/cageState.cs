@@ -86,11 +86,12 @@ public class cageState : MonoBehaviour
                 if (!dottedActivated)
                 {
                     Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position).normalized * (float) cagePositionUnits);
+                    Vector3 lookAtPo = _spot1.position + ((_spot2.position - _spot1.position).normalized * 10.0f);
                     if (Application.platform != RuntimePlatform.IPhonePlayer)
                     {
                         newPos = _spot1.position + ((_spot2.position - _spot1.position) * 1.5f);
                     }
-                    setCagePosition(newPos, Quaternion.identity);
+                    setCagePosition(newPos, lookAtPo);
                 }
                 setColorOfCage(dottedCage, dottedCageAlpha);
                 //setColorOfCage(lineCage, dottedCageAlpha);
@@ -229,13 +230,13 @@ public class cageState : MonoBehaviour
         masterAnimator.SetTrigger(trigName);
         yield return null;
     }
-    public void setCagePosition(Vector3 pos, Quaternion quat)
+    public void setCagePosition(Vector3 pos, Vector3 lookAtPos)
     {
         lineCage.SetActive(true);
         dottedCage.SetActive(true);
         dottedActivated = true;
         gameObject.transform.position = pos;
-        gameObject.transform.rotation = quat;
+        gameObject.transform.LookAt(lookAtPos);
         cageState.spawnCages(dottedCage.transform);
         cageState.spawnCages(lineCage.transform);
     }
