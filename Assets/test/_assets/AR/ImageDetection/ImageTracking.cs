@@ -109,13 +109,23 @@ public class ImageTracking : MonoBehaviour
             spawnedDetectorPrefabs.transform.rotation = _currentlyTracking.transform.rotation;
             spawnedDetectorPrefabs.name = _currentlyTracking.referenceImage.name;
             //if (imageDetected)
-            if(true)
+
+            //spawnAnchor2(spawnedPrefabs);
+            cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
+            imageDetected = false;
+            _currentlyTracking = null;
+            spawnedDetectorPrefabs.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            spawnedDetectorPrefabs.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+            if (TrigPoint1)
             {
-                //spawnAnchor2(spawnedPrefabs);
-                cageCtrl.SetImageSpot(spawnedDetectorPrefabs.transform);
-                imageDetected = false;
-                _currentlyTracking = null;
+                spawnedDetectorPrefabs.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                
             }
+            if (TrigPoint2)
+            {
+                spawnedDetectorPrefabs.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+            }
+
         }
 
 
