@@ -92,10 +92,16 @@ public class gpConnector : MonoBehaviour
         }
         return path;
     }
-
-
-    [MenuItem("SO / Update Linerenderer")]
-    static void AddLineRenderer()
+    [MenuItem("SO / Move CAGE Root")]
+    static void MoveCageRoot()
+    {
+        GameObject lienRoot = GameObject.Find("LINE_Root");
+        GameObject dottedRoot = GameObject.Find("DOTTED_Root");
+        cageState.spawnCages(lienRoot.transform);
+        cageState.spawnCages(dottedRoot.transform);
+    }
+    [MenuItem("SO / Update constraint")]
+    static void UpdateConstraint()
     {
         string cageMat = "Assets/test/_assets/CONNECTION/cageMat.mat";
         string vfxAsset = "Assets/test/_assets/CONNECTION/src/connectionFX.vfx";
@@ -196,7 +202,7 @@ public class gpConnector : MonoBehaviour
         }
 
     }
-
+    /*
     [MenuItem("SO / set line render width")]
     static void SetLineRendererWidth()
     {
