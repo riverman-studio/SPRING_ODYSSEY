@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SO/main.unity
     guid: 13bfd2ad776e3a64cb5fb2f27a661445
+  - enabled: 1
+    path: Assets/SO/calibration_tool.unity
+    guid: 4e7dba32c7fa1a54087cf15ecbe55493
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: c845c3f3abf54eb48851ca992055e871, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 1157408b903c1624299cde17a0f9d55a, type: 2}

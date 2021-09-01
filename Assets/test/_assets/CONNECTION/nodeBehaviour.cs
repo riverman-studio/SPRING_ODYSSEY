@@ -44,7 +44,8 @@ public class nodeBehaviour : templateBehaviour
         }
         _vfx = gameObject.GetComponent<VisualEffect>();
         _gpConnector = connectionManager.GetComponent<gpConnector>();
-        _collisionCheck = _gpConnector.collisionCheck.gameObject;
+        if(_gpConnector.collisionCheck)
+            _collisionCheck = _gpConnector.collisionCheck.gameObject;
         Reset();
         _vfx.SetFloat("alpha", 0.0f);
     }

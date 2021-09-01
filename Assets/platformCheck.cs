@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
 public class platformCheck : MonoBehaviour
 {
     public GameObject inFront;
     public GameObject fpsController;
     public GameObject arController;
+    public GameObject calibrationButton;
+
+    private bool btnCalibrationActivated = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -39,9 +46,6 @@ public class platformCheck : MonoBehaviour
             constraint.sourceTransform = fpsController.transform.Find("Camera/attachObject");
             constraint.weight = 1.0f;
             parentConstr.AddSource(constraint);
-
-
-
         }
 
     }
@@ -50,5 +54,16 @@ public class platformCheck : MonoBehaviour
     void Update()
     {
         
+        if ((Input.touchCount == 2) || (Input.GetKeyDown(KeyCode.D)))
+        {
+            btnCalibrationActivated = !btnCalibrationActivated;
+            calibrationButton.SetActive(btnCalibrationActivated);
+        }
     }
+
+    public void LoadCalibrationScene()
+    {
+        SceneManager.LoadScene("calibration_tool");
+    }
+
 }
