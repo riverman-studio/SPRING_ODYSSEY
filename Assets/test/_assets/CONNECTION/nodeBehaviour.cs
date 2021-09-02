@@ -26,6 +26,7 @@ public class nodeBehaviour : templateBehaviour
     private Transform _connHelper = null;
     private GameObject _collisionCheck = null;
     private gpConnector _gpConnector = null;
+    private Animator masterAnimator = null;
     private float blipRate = 8.0f;
 
     public override LineRenderer GetLineRenderer()
@@ -48,6 +49,11 @@ public class nodeBehaviour : templateBehaviour
             _collisionCheck = _gpConnector.collisionCheck.gameObject;
         Reset();
         _vfx.SetFloat("alpha", 0.0f);
+
+        masterAnimator = GameObject.Find("__TIMELINE").GetComponent<Animator>();
+
+
+
     }
     private void Start()
     {
@@ -90,6 +96,11 @@ public class nodeBehaviour : templateBehaviour
 
         if (!_gpActivated)
             return;
+        bool atInteractionState = masterAnimator.GetCurrentAnimatorStateInfo(0).IsName("07_InteractionLigneToComplete");
+
+        if (!atInteractionState)
+            return;
+
         blipRate = 3.0f;
         Transform cameraTransform = Camera.main.transform;
         RaycastHit HitInfo;

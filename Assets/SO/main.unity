@@ -9516,8 +9516,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21223,6 +21222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84e063c27f321a41b57ba0577a73207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnLanguageText: {fileID: 674236295}
   uiImages:
   - uiImage: {fileID: 1734627510}
     vEn: {fileID: 21300000, guid: fdf11e582bdb9cb4d8b8e017f478cebb, type: 3}
@@ -21249,6 +21249,19 @@ MonoBehaviour:
     vEn: {fileID: 8300000, guid: ca9014b275fc3564ab1616cb30c4531b, type: 3}
   - uiAudio: {fileID: 1263319266}
     vEn: {fileID: 8300000, guid: 9653f7b12f16eb54c8355eec4b5156b2, type: 3}
+  enTextes:
+  - uiText: {fileID: 889505624}
+    vEn: 'headphones \n recommended '
+  - uiText: {fileID: 860081276}
+    vEn: SCAN THE SPOT
+  - uiText: {fileID: 1061190284}
+    vEn: SCAN THE SPOT
+  - uiText: {fileID: 471944077}
+    vEn: CONNECT THE DOTS
+  - uiText: {fileID: 1675372955}
+    vEn: COME CLOSER TO THE PLANT
+  - uiText: {fileID: 1935543068}
+    vEn: HOLD TO WHISPER
 --- !u!1 &597384214
 GameObject:
   m_ObjectHideFlags: 0
@@ -22123,9 +22136,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -22144,7 +22157,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 628126962}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590348226}
+        m_TargetAssemblyTypeName: Localization, Assembly-CSharp
+        m_MethodName: switchLanguage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &628126962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68020,6 +68045,7 @@ RectTransform:
   - {fileID: 738548911}
   - {fileID: 471944076}
   - {fileID: 1675372954}
+  - {fileID: 1935543070}
   m_Father: {fileID: 1095123748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -68043,6 +68069,85 @@ MonoBehaviour:
   childAnimator: {fileID: 1581574454}
   triggerName: Input
   triggerValue: 0
+--- !u!1 &1935543067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935543070}
+  - component: {fileID: 1935543069}
+  - component: {fileID: 1935543068}
+  m_Layer: 5
+  m_Name: ConsigneParler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1935543068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935543067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 412acc6e25fc79c4e85dac84afd10ac5, type: 3}
+    m_FontSize: 15
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 128
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MAINTENEZ POUR CHOUCHOTER
+--- !u!222 &1935543069
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935543067}
+  m_CullTransparentMesh: 1
+--- !u!224 &1935543070
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935543067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1930207312}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.055294037, y: 39.730988}
+  m_SizeDelta: {x: 449.67, y: 79.462}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1935658025
 GameObject:
   m_ObjectHideFlags: 0
