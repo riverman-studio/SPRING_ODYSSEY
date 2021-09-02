@@ -119,16 +119,25 @@ public class ImageTracking : MonoBehaviour
             if (TrigPoint1)
             {
                 spawnedDetectorPrefabs.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                StartCoroutine(__hideMarker(spawnedDetectorPrefabs.transform.GetChild(0).GetChild(0).gameObject));
                 
             }
             if (TrigPoint2)
             {
                 spawnedDetectorPrefabs.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+                StartCoroutine(__hideMarker(spawnedDetectorPrefabs.transform.GetChild(0).GetChild(1).gameObject));
             }
-
         }
+    }
 
-
+    IEnumerator __hideMarker(GameObject aiMarker)
+    {
+        if(aiMarker.activeSelf)
+        {
+            yield return new WaitForSeconds(3.0f);
+            aiMarker.SetActive(false);
+        }
+        yield return null;
     }
     
     private void UpdateImage(ARTrackedImage trackedImage)

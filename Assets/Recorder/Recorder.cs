@@ -108,7 +108,7 @@ namespace Recorder
 
         public void  Save(string fileName = "test")
         {
-            string finalDirectory = Application.streamingAssetsPath;
+            string finalDirectory = Application.persistentDataPath;
 #if UNITY_EDITOR
             finalDirectory = finalDirectory.Substring(0, finalDirectory.LastIndexOf('/'));
             finalDirectory = finalDirectory.Substring(0, finalDirectory.LastIndexOf('/'));
