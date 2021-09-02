@@ -9505,8 +9505,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21162,6 +21161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 590348224}
   - component: {fileID: 590348225}
+  - component: {fileID: 590348226}
   m_Layer: 0
   m_Name: SOManager
   m_TagString: Untagged
@@ -21199,6 +21199,26 @@ MonoBehaviour:
   fpsController: {fileID: 2003673446}
   arController: {fileID: 1072346457}
   calibrationButton: {fileID: 690376135}
+--- !u!114 &590348226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590348223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84e063c27f321a41b57ba0577a73207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImages:
+  - uiImage: {fileID: 1734627510}
+    vEn: {fileID: 21300000, guid: fdf11e582bdb9cb4d8b8e017f478cebb, type: 3}
+  - uiImage: {fileID: 276446060}
+    vEn: {fileID: 21300000, guid: 2fa0a0ff25831174283b182128488fee, type: 3}
+  enAudios:
+  - uiAudio: {fileID: 1470576564}
+    vEn: {fileID: 8300000, guid: c7c48a9bb8a62e547a88fde37e06445f, type: 3}
 --- !u!1 &597384214
 GameObject:
   m_ObjectHideFlags: 0
@@ -60361,6 +60381,7 @@ GameObject:
   - component: {fileID: 1734627511}
   - component: {fileID: 1734627510}
   - component: {fileID: 1734627509}
+  - component: {fileID: 1734627512}
   m_Layer: 5
   m_Name: Titre
   m_TagString: Untagged
@@ -60444,6 +60465,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734627507}
   m_CullTransparentMesh: 1
+--- !u!114 &1734627512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734627507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa873ecf97f4c1e4d9ff718f864cf0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enVersion: {fileID: 2800000, guid: fdf11e582bdb9cb4d8b8e017f478cebb, type: 3}
 --- !u!1 &1741565336
 GameObject:
   m_ObjectHideFlags: 0
