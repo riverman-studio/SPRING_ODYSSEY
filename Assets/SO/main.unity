@@ -3536,6 +3536,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93078273}
   m_CullTransparentMesh: 1
+--- !u!114 &93575267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7584830297687833553, guid: 9e3019629e93ac94eae463361755045c, type: 3}
+  m_PrefabInstance: {fileID: 1604811288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &95714779
 GameObject:
   m_ObjectHideFlags: 0
@@ -9505,7 +9516,8 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14241,7 +14253,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394985514}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 237c3800df5993741bf22898ddec66c7, type: 3}
@@ -21216,9 +21228,27 @@ MonoBehaviour:
     vEn: {fileID: 21300000, guid: fdf11e582bdb9cb4d8b8e017f478cebb, type: 3}
   - uiImage: {fileID: 276446060}
     vEn: {fileID: 21300000, guid: 2fa0a0ff25831174283b182128488fee, type: 3}
+  - uiImage: {fileID: 93575267}
+    vEn: {fileID: 21300000, guid: bc1d319b9a25a2547b3b98c8ec792233, type: 3}
   enAudios:
-  - uiAudio: {fileID: 1470576564}
+  - uiAudio: {fileID: 394985516}
+    vEn: {fileID: 8300000, guid: 255dca4b013c7f34891cfa1554fcbde9, type: 3}
+  - uiAudio: {fileID: 122723358}
+    vEn: {fileID: 8300000, guid: 99c4bd23939ca214ea740592952374e4, type: 3}
+  - uiAudio: {fileID: 1587355034}
+    vEn: {fileID: 8300000, guid: c0b77096f843c6542896672ddb1390e8, type: 3}
+  - uiAudio: {fileID: 506709017}
     vEn: {fileID: 8300000, guid: c7c48a9bb8a62e547a88fde37e06445f, type: 3}
+  - uiAudio: {fileID: 484375297}
+    vEn: {fileID: 8300000, guid: 7457446c963bb1d4285ded69c7dcd99c, type: 3}
+  - uiAudio: {fileID: 816082140}
+    vEn: {fileID: 8300000, guid: 881e60e5b4d373549be91516c9f8dc9c, type: 3}
+  - uiAudio: {fileID: 614178364}
+    vEn: {fileID: 8300000, guid: 47abe75e102659344a96ac8ebc247451, type: 3}
+  - uiAudio: {fileID: 1062602348}
+    vEn: {fileID: 8300000, guid: ca9014b275fc3564ab1616cb30c4531b, type: 3}
+  - uiAudio: {fileID: 1263319266}
+    vEn: {fileID: 8300000, guid: 9653f7b12f16eb54c8355eec4b5156b2, type: 3}
 --- !u!1 &597384214
 GameObject:
   m_ObjectHideFlags: 0
@@ -31781,7 +31811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &875485462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35307,7 +35337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &972656062
 Transform:
   m_ObjectHideFlags: 0
@@ -48538,13 +48568,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389504708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -60477,7 +60507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa873ecf97f4c1e4d9ff718f864cf0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enVersion: {fileID: 2800000, guid: fdf11e582bdb9cb4d8b8e017f478cebb, type: 3}
 --- !u!1 &1741565336
 GameObject:
   m_ObjectHideFlags: 0
