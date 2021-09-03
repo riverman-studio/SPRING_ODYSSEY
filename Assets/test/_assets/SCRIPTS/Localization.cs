@@ -127,7 +127,7 @@ public class Localization : MonoBehaviour
         {
             enAud.uiAudio.Stop();
             enAud.uiAudio.clip = null;
-            enAud.uiAudio.clip = enAud.vEn;
+            enAud.uiAudio.clip = enAud.getVFr();
         }
     }
 
