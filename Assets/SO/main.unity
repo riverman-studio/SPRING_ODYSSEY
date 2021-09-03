@@ -9637,8 +9637,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76830,7 +76829,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.17870599
+  m_Radius: 0.35
   m_Height: 1.22
   m_Direction: 1
   m_Center: {x: -0.04, y: 0.37999988, z: 0.04077284}
@@ -76895,7 +76894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d102085c83ccb8f48a88d9be4862af91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radColor: {r: 1, g: 0.8747171, b: 0.5613208, a: 1}
+  radColor: {r: 1, g: 0, b: 0.07028246, a: 1}
 --- !u!54 &2135870046
 Rigidbody:
   m_ObjectHideFlags: 0
