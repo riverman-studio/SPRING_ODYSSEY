@@ -57,11 +57,16 @@ namespace Recorder
                 return;
             if (isRecording)
                 return;
-            if(Microphone.devices.Length > 0)
-                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+            StartCoroutine(__kickRecording());
             isRecording = true;
         }
 
+        IEnumerator __kickRecording()
+        {
+            if (Microphone.devices.Length > 0)
+                audioSource.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+            yield return null;
+        }
         
         public void StopRecording(string filePrefix)
         {
