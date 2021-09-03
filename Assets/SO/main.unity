@@ -6895,11 +6895,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 386.806
+      value: 423.2628
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 97.8302
+      value: 95.085
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6931,7 +6931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6951,10 +6951,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_Text
-      value: "TRADUCTION MANQUANTE : Dans le cadre d'une d\xE9marche artistique et
-        personnelle, votre voix est susceptible d'\xEAtre enregistr\xE9e pendant
-        quelques secondes au cours de l'exp\xE9rience. \nAucun usage ult\xE9rieur
-        n'en sera fait."
+      value: As part of an artistic and personal approach, your voice may be recorded
+        for a few seconds during the experience. No further use will be made of it.
       objectReference: {fileID: 0}
     - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_Color.a
