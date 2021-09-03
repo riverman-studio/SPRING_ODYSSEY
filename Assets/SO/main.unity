@@ -6895,11 +6895,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 423.2628
+      value: 385.9907
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 95.085
+      value: 71.8778
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6931,11 +6931,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.40765
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -82
+      value: -68.3
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6951,12 +6951,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_Text
-      value: As part of an artistic and personal approach, your voice may be recorded
-        for a few seconds during the experience. No further use will be made of it.
+      value: 'As part of an artistic and personal approach, your voice may be recorded
+        for a few seconds during the experience.
+
+        No further use will be
+        made of it.'
       objectReference: {fileID: 0}
     - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_Color.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
@@ -12975,11 +12990,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 386.806
+      value: 374.1476
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 97.8302
+      value: 79.5457
       objectReference: {fileID: 0}
     - target: {fileID: 3031109746596899979, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13030,7 +13045,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
+      propertyPath: m_Text
+      value: "Dans le cadre d'une d\xE9marche artistique \net personnelle, votre
+        voix est susceptible d'\xEAtre enregistr\xE9e pendant quelques secondes au
+        cours de l'exp\xE9rience. \nAucun usage ult\xE9rieur n'en sera fait."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569733976500871239, guid: 6a54eefad194d8a47974c79739e1b2bb, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
