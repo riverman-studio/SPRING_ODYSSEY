@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+
 public class soGameplay : MonoBehaviour
 {
     public Animator MicroAnimator;
@@ -14,6 +16,7 @@ public class soGameplay : MonoBehaviour
 
     float _fRecordingTime = 0.0f;
     public Button recordButton;
+    bool _bIsRestarting = false;
     void Awake()
     {
         _timelineAnimator = GetComponent<Animator>();
@@ -25,6 +28,7 @@ public class soGameplay : MonoBehaviour
     {
         bool microVent = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("03_MicroVent");
         bool chuchoter = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("11_Chuchoter");
+        bool credits = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("14_Credit");
 
         if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicFadeIn"))
         {
@@ -38,6 +42,24 @@ public class soGameplay : MonoBehaviour
                 _recordingState = RecordingState.KickRecording;
             }
         }
+
+        if(credits && !_bIsRestarting)
+        {
+            _bIsRestarting = true;
+            StartCoroutine(__restart());
+        }
+    }
+
+    IEnumerator __restart()
+    {
+
+        do
+        {
+            yield return new WaitForSeconds(5.0f);
+        }while (Input.touchCount != 0);
+
+        SceneManager.LoadScene("main");
+        yield return null;
     }
 
     public void btnStartRecording()
