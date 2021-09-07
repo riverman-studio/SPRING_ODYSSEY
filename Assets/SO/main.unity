@@ -77361,7 +77361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d102085c83ccb8f48a88d9be4862af91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radColor: {r: 1, g: 0.7751428, b: 0.3443396, a: 1}
+  radColor: {r: 0.76470596, g: 0.6117647, b: 0.011764707, a: 1}
 --- !u!54 &2135870046
 Rigidbody:
   m_ObjectHideFlags: 0
