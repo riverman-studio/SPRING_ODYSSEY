@@ -85,13 +85,19 @@ public class cageState : MonoBehaviour
             {
                 if (!dottedActivated)
                 {
-                    Vector3 newPos = _spot1.position + ((_spot2.position - _spot1.position).normalized * (float) cagePositionUnits);
-                    Vector3 lookAtPo = _spot1.position + ((_spot2.position - _spot1.position).normalized * 10.0f);
+                    Vector3 newPos = _spot1.position + (_spot1.forward * 3.5f);
+                    //Vector3 newPos = _spot2.position + (_spot2.forward * 2.5f);
+                    
+                    Vector3 lookAtPo = _spot1.position + (_spot1.forward * 10.0f);
+
+                    newPos.y = _spot1.position.y;
+                    lookAtPo.y = _spot1.position.y;
                     if (Application.platform != RuntimePlatform.IPhonePlayer)
                     {
                         newPos = _spot1.position + ((_spot2.position - _spot1.position) * 1.5f);
                     }
                     setCagePosition(newPos, lookAtPo);
+                    //setCagePosition(newPos, _spot2.rotation);
                 }
                 setColorOfCage(dottedCage, dottedCageAlpha);
                 //setColorOfCage(lineCage, dottedCageAlpha);
@@ -201,7 +207,8 @@ public class cageState : MonoBehaviour
        
          if ((txSport.name == "Spot1") && (TrigPoint1) && !_gotSpot1)
         {
-            _spot1.position = txSport.position;
+
+            _spot1.position = txSport.position;   //MGE DEBUG
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
             //masterAnimator.SetTrigger("Trigger1");
@@ -231,14 +238,17 @@ public class cageState : MonoBehaviour
         yield return null;
     }
     public void setCagePosition(Vector3 pos, Vector3 lookAtPos)
+    //public void setCagePosition(Vector3 pos, Quaternion rot)
     {
         lineCage.SetActive(true);
         dottedCage.SetActive(true);
         dottedActivated = true;
         gameObject.transform.position = pos;
+        //gameObject.transform.rotation = rot;
         gameObject.transform.LookAt(lookAtPos);
         cageState.spawnCages(dottedCage.transform);
         cageState.spawnCages(lineCage.transform);
+        //gameObject.AddComponent<ARAnchor>();
     }
 
 

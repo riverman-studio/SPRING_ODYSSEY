@@ -18,6 +18,7 @@ public class platformCheck : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Application.targetFrameRate = 30;
 
         ParentConstraint parentConstr = inFront.GetComponent<ParentConstraint>();
 

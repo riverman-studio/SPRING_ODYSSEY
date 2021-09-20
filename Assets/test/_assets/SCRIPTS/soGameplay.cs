@@ -55,7 +55,7 @@ public class soGameplay : MonoBehaviour
 
         do
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(10.0f);
         }while (Input.touchCount != 0);
 
         SceneManager.LoadScene("main");

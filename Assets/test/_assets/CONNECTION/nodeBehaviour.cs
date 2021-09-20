@@ -59,11 +59,19 @@ public class nodeBehaviour : templateBehaviour
     {
         if (_gpActivated)
         {
-            ActivateInteraction();
+            StartCoroutine(__ShowConnectionHighlight());
         }
 
 
     }
+
+    IEnumerator __ShowConnectionHighlight()
+    {
+        yield return new WaitForSeconds(32.0f);
+        ActivateInteraction();
+        yield return null;
+    }
+
     void Reset()
     {
         _state = ConnectionState.NotStarted;
