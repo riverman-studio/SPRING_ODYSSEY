@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class soGameplay : MonoBehaviour
 {
     public Animator MicroAnimator;
-    enum RecordingState { NotRecording, KickRecording, Recording, Saving};
+    enum RecordingState { NotRecording, ReadyToRecord, KickRecording, Recording, Saving};
 
     Animator _timelineAnimator = null;
     Recorder.Recorder _recorder = null;
@@ -29,17 +29,19 @@ public class soGameplay : MonoBehaviour
         bool microVent = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("03_MicroVent");
         bool chuchoter = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("11_Chuchoter");
         bool credits = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("14_Credit");
+        bool fin = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("12_Fin");
 
         if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicFadeIn"))
         {
             _recordingState = RecordingState.NotRecording;
         }
 
-        if(_recordingState == RecordingState.NotRecording)
+        if(_recordingState == RecordingState.ReadyToRecord)
         {
-            if (microVent || chuchoter)
+            if (fin)
             {
                 _recordingState = RecordingState.KickRecording;
+                StartCoroutine(__kickRecording());
             }
         }
 
@@ -64,12 +66,12 @@ public class soGameplay : MonoBehaviour
 
     public void btnStartRecording()
     {
-        if (_recordingState == RecordingState.KickRecording)
+        if (_recordingState == RecordingState.NotRecording)
         {
             //if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicIdleAnimVu"))
             {
-                _recordingState = RecordingState.Recording;
-                StartCoroutine(__kickRecording());
+                _recordingState = RecordingState.ReadyToRecord;
+//                StartCoroutine(__kickRecording());
             }
         }
     }
@@ -89,8 +91,9 @@ public class soGameplay : MonoBehaviour
             _recordingState = RecordingState.NotRecording;
             if (microVent)
                 _timelineAnimator.SetTrigger("Recorded1");
-            if (chuchoter)
-                _timelineAnimator.SetTrigger("Recorded2");
+            //if (chuchoter)
+            //    _timelineAnimator.SetTrigger("Recorded2");
+            _recordingState = RecordingState.NotRecording;
         }
     }
 
@@ -105,11 +108,13 @@ public class soGameplay : MonoBehaviour
     IEnumerator __kickRecording()
     {
         _recorder.StartRecording();
-        for(; ; )
-        {
-            _fRecordingTime += Time.deltaTime;
-            yield return null;
-        }
+        //for(; ; )
+        //{
+        //    _fRecordingTime += Time.deltaTime;
+        //    yield return null;
+        //}
+        yield return new WaitForSeconds(10.0f);
+        btnStopRecording();
         yield return null;
     }
 }
