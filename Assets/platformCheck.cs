@@ -13,7 +13,9 @@ public class platformCheck : MonoBehaviour
     public GameObject arController;
     public GameObject calibrationButton;
 
-    private bool btnCalibrationActivated = false;
+    public static bool CalibrationActivated = false;
+
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -57,14 +59,16 @@ public class platformCheck : MonoBehaviour
         
         if ((Input.touchCount == 2) || (Input.GetKeyDown(KeyCode.D)))
         {
-            btnCalibrationActivated = !btnCalibrationActivated;
-            calibrationButton.SetActive(btnCalibrationActivated);
+            
+            calibrationButton.SetActive(true);
         }
     }
 
     public void LoadCalibrationScene()
     {
-        SceneManager.LoadScene("calibration_tool");
+        calibrationButton.GetComponent<Button>().interactable = false;
+        CalibrationActivated = true;
+        //SceneManager.LoadScene("calibration_tool");
     }
 
 }

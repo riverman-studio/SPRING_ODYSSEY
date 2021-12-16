@@ -163,7 +163,15 @@ public class cageState : MonoBehaviour
                         _spot1.position = HitInfo.collider.gameObject.transform.position;
                         _spot1.rotation = HitInfo.collider.gameObject.transform.rotation;
                         _gotSpot1 = true;
-                        masterAnimator.SetTrigger("Trigger1");
+                        
+                        if (platformCheck.CalibrationActivated)
+                        {
+                            masterAnimator.SetTrigger("CALIBRATE");
+                        }
+                        else
+                        {
+                            masterAnimator.SetTrigger("Trigger1");
+                        }
                         //masterAnimator.SetTrigger("DebugNext");
                         spawnWind(HitInfo.collider.gameObject.transform);
                     }
@@ -212,7 +220,15 @@ public class cageState : MonoBehaviour
             _spot1.rotation = txSport.rotation;
             _gotSpot1 = true;
             //masterAnimator.SetTrigger("Trigger1");
-            StartCoroutine(__delayTrig("Trigger1"));
+            if(platformCheck.CalibrationActivated)
+            {
+                StartCoroutine(__delayTrig("CALIBRATE"));
+            }
+            else
+            {
+                StartCoroutine(__delayTrig("Trigger1"));
+            }
+            
             spawnWind(txSport);
 
         }
