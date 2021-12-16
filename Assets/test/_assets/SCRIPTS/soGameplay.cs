@@ -107,6 +107,7 @@ public class soGameplay : MonoBehaviour
 
     IEnumerator __kickRecording()
     {
+        _recordingState = RecordingState.Recording;
         _recorder.StartRecording();
         //for(; ; )
         //{
