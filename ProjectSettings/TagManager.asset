@@ -6,6 +6,7 @@ TagManager:
   tags:
   - gpNode
   - sisterNode
+  - stMasterNode
   layers:
   - Default
   - TransparentFX

@@ -60,7 +60,8 @@ public class soGameplay : MonoBehaviour
             yield return new WaitForSeconds(10.0f);
         }while (Input.touchCount != 0);
 
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
         yield return null;
     }
 
@@ -68,10 +69,8 @@ public class soGameplay : MonoBehaviour
     {
         if (_recordingState == RecordingState.NotRecording)
         {
-            //if (MicroAnimator.GetCurrentAnimatorStateInfo(0).IsName("MicIdleAnimVu"))
             {
                 _recordingState = RecordingState.ReadyToRecord;
-//                StartCoroutine(__kickRecording());
             }
         }
     }
@@ -83,10 +82,8 @@ public class soGameplay : MonoBehaviour
             string filePrefix = "";
             bool microVent = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("03_MicroVent");
             bool chuchoter = _timelineAnimator.GetCurrentAnimatorStateInfo(0).IsName("11_Chuchoter");
-            if (microVent)
-                filePrefix = "_REC-1_";
-            if (chuchoter)
-                filePrefix = "_REC-2_";
+            filePrefix = "_" + Localization.soLanguage + "_";
+
             _recorder.StopRecording(filePrefix);
             _recordingState = RecordingState.NotRecording;
             if (microVent)

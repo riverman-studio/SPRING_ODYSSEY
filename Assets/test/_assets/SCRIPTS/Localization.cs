@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 
 public class Localization : MonoBehaviour
 {
+    public static string soLanguage = "FR";
     public Text btnLanguageText;
     [System.Serializable]
     public class enImage
@@ -112,6 +113,8 @@ public class Localization : MonoBehaviour
             btnLanguageText.text = "EN";
             SwitchToFrench();
         }
+
+        Localization.soLanguage = btnLanguageText.text;
     }
     public void SwitchToFrench()
     {

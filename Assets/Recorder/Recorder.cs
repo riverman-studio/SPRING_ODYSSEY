@@ -29,7 +29,7 @@ namespace Recorder
         const int HEADER_SIZE = 44;
 
 
-        static string timeStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        
         #endregion
 
         #region Editor Exposed Variables
@@ -79,6 +79,7 @@ namespace Recorder
         }
         IEnumerator __writeRecording(string filePrefix)
         {
+            string timeStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             if (Microphone.devices.Length > 0)
                 Save("SO_" + filePrefix + "_" + timeStamp);
             isWriting = false;

@@ -15,7 +15,10 @@ public class platformCheck : MonoBehaviour
 
     public static bool CalibrationActivated = false;
 
-    
+    public Transform lineStructure;
+    public Transform dottedStructure;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -51,6 +54,31 @@ public class platformCheck : MonoBehaviour
             parentConstr.AddSource(constraint);
         }
 
+        int calibrationMode = PlayerPrefs.GetInt("calibrationMode");
+        //calibrationMode = 1;
+        if (calibrationMode != 0)
+        {
+            CalibrationActivated = true;
+        }
+
+
+        if (PlayerPrefs.GetInt("hasStructure") == 1)
+        {
+            //prepareProgrmmateurMode();
+            prepareProgrmmateurMode(lineStructure);
+            prepareProgrmmateurMode(dottedStructure);
+        }
+
+    }
+
+    void prepareProgrmmateurMode(Transform st)
+    {
+        for (int i = 0; i < st.transform.GetChildCount(); i++)
+        {
+            Transform stPiece = st.transform.GetChild(i);
+            stPiece.gameObject.SetActive(true);
+            stPiece.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
     // Update is called once per frame
