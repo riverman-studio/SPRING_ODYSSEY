@@ -55785,6 +55785,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 7822534987146454921, guid: 9e3019629e93ac94eae463361755045c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353103589402714354, guid: 9e3019629e93ac94eae463361755045c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e3019629e93ac94eae463361755045c, type: 3}
 --- !u!1 &1607552863
